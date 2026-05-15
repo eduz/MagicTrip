@@ -1,0 +1,17 @@
+[
+  {"id": "shop_premium",   "category": "Compras",     "title": "Premium Outlets International", "dur": "dia inteiro"},
+  {"id": "shop_vineland",  "category": "Compras",     "title": "Vineland Outlets",              "dur": "dia inteiro"},
+  {"id": "shop_millenia",  "category": "Compras",     "title": "Mall at Millenia",              "dur": "meia tarde"},
+  {"id": "shop_dsprings",  "category": "Compras",     "title": "Disney Springs",                "dur": "noite"},
+  {"id": "shop_walmart",   "category": "Compras",     "title": "Walmart / Target",              "dur": "rápido"},
+  {"id": "food_themed",    "category": "Gastronomia", "title": "Restaurante temático",          "dur": "noite"},
+  {"id": "food_citywalk",  "category": "Gastronomia", "title": "CityWalk Universal",            "dur": "noite"},
+  {"id": "rest_pool",      "category": "Descanso",    "title": "Dia de piscina no hotel",       "dur": "dia inteiro"},
+  {"id": "rest_spa",       "category": "Descanso",    "title": "Dia de spa",                    "dur": "meio dia"},
+  {"id": "logi_arrival",   "category": "Logística",   "title": "Dia de chegada",                "dur": "meio dia"},
+  {"id": "logi_departure", "category": "Logística",   "title": "Dia de partida",                "dur": "meio dia"},
+  {"id": "trip_ksc",       "category": "Passeios",    "title": "Kennedy Space Center",          "dur": "dia inteiro"},
+  {"id": "trip_clearwater","category": "Passeios",    "title": "Clearwater Beach",              "dur": "dia inteiro"},
+  {"id": "fun_iconpark",   "category": "Entretenimento", "title": "ICON Park (roda-gigante)",   "dur": "noite"},
+  {"id": "fun_topgolf",    "category": "Entretenimento", "title": "Top Golf",                   "dur": "noite"}
+]

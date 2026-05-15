@@ -1,0 +1,19 @@
+[
+  {"code": "BR", "name": "Brasil",          "flag": "🇧🇷", "pinned": true},
+  {"code": "US", "name": "Estados Unidos",  "flag": "🇺🇸"},
+  {"code": "CA", "name": "Canadá",          "flag": "🇨🇦"},
+  {"code": "AR", "name": "Argentina",       "flag": "🇦🇷"},
+  {"code": "MX", "name": "México",          "flag": "🇲🇽"},
+  {"code": "PT", "name": "Portugal",        "flag": "🇵🇹"},
+  {"code": "ES", "name": "Espanha",         "flag": "🇪🇸"},
+  {"code": "GB", "name": "Reino Unido",     "flag": "🇬🇧"},
+  {"code": "DE", "name": "Alemanha",        "flag": "🇩🇪"},
+  {"code": "FR", "name": "França",          "flag": "🇫🇷"},
+  {"code": "IT", "name": "Itália",          "flag": "🇮🇹"},
+  {"code": "AU", "name": "Austrália",       "flag": "🇦🇺"},
+  {"code": "JP", "name": "Japão",           "flag": "🇯🇵"},
+  {"code": "CL", "name": "Chile",           "flag": "🇨🇱"},
+  {"code": "CO", "name": "Colômbia",        "flag": "🇨🇴"},
+  {"code": "PE", "name": "Peru",            "flag": "🇵🇪"},
+  {"code": "OTHER", "name": "Outro",        "flag": "🌍"}
+]

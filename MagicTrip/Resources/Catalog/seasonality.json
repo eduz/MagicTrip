@@ -1,0 +1,14 @@
+[
+  {"m":1,  "name":"Jan", "crowd":"Baixa",      "tempF":72, "rain":18, "price":"Baixo",  "events":[], "bestFor":["Economia","Idosos"], "summary":"Clima fresco, baixa lotação após 5/jan. Ótimo custo-benefício."},
+  {"m":2,  "name":"Fev", "crowd":"Baixa",      "tempF":75, "rain":20, "price":"Baixo",  "events":["Mardi Gras"], "bestFor":["Economia"], "summary":"Continua baixa temporada, preços ainda em queda."},
+  {"m":3,  "name":"Mar", "crowd":"Muito alta", "tempF":79, "rain":22, "price":"Alto",   "events":["Spring Break","Flower & Garden"], "bestFor":[], "summary":"Pico americano. Evite se busca baixa lotação."},
+  {"m":4,  "name":"Abr", "crowd":"Alta",       "tempF":84, "rain":25, "price":"Alto",   "events":["Páscoa","Flower & Garden"], "bestFor":["Famílias"], "summary":"Clima ótimo, mas Páscoa lota tudo."},
+  {"m":5,  "name":"Mai", "crowd":"Média",      "tempF":88, "rain":35, "price":"Médio",  "events":["Memorial Day"], "bestFor":["Casais"], "summary":"Pré-verão. Boa janela antes da temporada alta."},
+  {"m":6,  "name":"Jun", "crowd":"Alta",       "tempF":91, "rain":55, "price":"Alto",   "events":["Início férias EUA"], "bestFor":["Famílias"], "summary":"Calor + chuva diária. Lotação alta com férias americanas."},
+  {"m":7,  "name":"Jul", "crowd":"Muito alta", "tempF":92, "rain":60, "price":"Alto",   "events":["Independence Day","Férias BR"], "bestFor":["Famílias"], "summary":"Pico de férias BR e EUA. Passagem aérea +40%."},
+  {"m":8,  "name":"Ago", "crowd":"Média",      "tempF":91, "rain":60, "price":"Médio",  "events":["Halloween Horror Nights"], "bestFor":["Economia","Casais"], "summary":"Volta às aulas EUA — lotação cai bastante."},
+  {"m":9,  "name":"Set", "crowd":"Baixa",      "tempF":89, "rain":50, "price":"Baixo",  "events":["Halloween Horror Nights","Food & Wine"], "bestFor":["Economia","Halloween"], "summary":"Mês ouro: baixa lotação, preço baixo, eventos. Calor intenso."},
+  {"m":10, "name":"Out", "crowd":"Média",      "tempF":84, "rain":30, "price":"Médio",  "events":["Halloween Horror Nights","Mickey Not-So-Scary"], "bestFor":["Halloween","Casais"], "summary":"Clima ameno e eventos especiais — equilibra preço e diversão."},
+  {"m":11, "name":"Nov", "crowd":"Baixa",      "tempF":77, "rain":20, "price":"Baixo",  "events":["Food & Wine","Thanksgiving"], "bestFor":["Economia","Idosos"], "summary":"Início de nov é janela rara: preço baixo, clima perfeito."},
+  {"m":12, "name":"Dez", "crowd":"Muito alta", "tempF":73, "rain":18, "price":"Alto",   "events":["Mickey's Very Merry Christmas","Réveillon"], "bestFor":["Famílias"], "summary":"Natal mágico, mas pico absoluto de preço e lotação."}
+]

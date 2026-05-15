@@ -1,0 +1,103 @@
+/* pt-BR — authoritative locale */
+
+/* General */
+"Fechar" = "Fechar";
+"Cancelar" = "Cancelar";
+"Salvar" = "Salvar";
+"Continuar" = "Continuar";
+"Adicionar" = "Adicionar";
+
+/* Onboarding */
+"Último passo" = "Último passo";
+"Orçamento total (opcional)" = "Orçamento total (opcional)";
+"Usado para calibrar dicas de economia. Fica salvo só no aparelho." = "Usado para calibrar dicas de economia. Fica salvo só no aparelho.";
+"Orçamento estimado" = "Orçamento estimado";
+"Gerar meu checklist" = "Gerar meu checklist";
+
+/* Checklist */
+"Sua viagem" = "Sua viagem";
+"Pra Orlando" = "Pra Orlando";
+"Em modo planejamento" = "Em modo planejamento";
+"Progresso geral" = "Progresso geral";
+"de" = "de";
+"tarefas" = "tarefas";
+"dias até a viagem" = "dias até a viagem";
+"ECONOMIA ESTIMADA" = "ECONOMIA ESTIMADA";
+"Modo planejamento. Defina a data da viagem para liberar todas as tarefas com prazo." = "**Modo planejamento.** Defina a data da viagem para liberar todas as tarefas com prazo.";
+"Nova" = "Nova";
+"Aguarda data" = "Aguarda data";
+"Hoje" = "Hoje";
+"por pessoa" = "por pessoa";
+"compartilhado" = "compartilhado";
+"Marcar como feita" = "Marcar como feita";
+"Salvar resposta" = "Salvar resposta";
+"Pular" = "Pular";
+"Reabrir" = "Reabrir";
+"Por que esta tarefa apareceu?" = "Por que esta tarefa apareceu?";
+"Selecione os parques" = "Selecione os parques";
+"Comparar épocas" = "Comparar épocas";
+"Dicas" = "Dicas";
+"Dicas de economia" = "Dicas de economia";
+
+/* Savings */
+"Economia estimada" = "Economia estimada";
+"Nenhuma dica de economia aplicada ainda." = "Nenhuma dica de economia aplicada ainda.";
+"Dicas aplicadas" = "Dicas aplicadas";
+"O valor é estimado. Pode variar conforme promoções e disponibilidade." = "O valor é estimado. Pode variar conforme promoções e disponibilidade.";
+"Compartilhar" = "Compartilhar";
+
+/* Calendar */
+"Calendário" = "Calendário";
+"Dia a dia" = "Dia a dia";
+"Defina a data da viagem para usar o calendário" = "Defina a data da viagem para usar o calendário";
+"Pronto para planejar seu roteiro?" = "Pronto para planejar seu roteiro?";
+"Criar dias da viagem" = "Criar dias da viagem";
+"Adicionar atividade" = "Adicionar atividade";
+"Também planejado em" = "Também planejado em";
+"Mover para outro dia" = "Mover para outro dia";
+"Remover" = "Remover";
+"Mover para" = "Mover para";
+"Adicionar atividade" = "Adicionar atividade";
+"Parques" = "Parques";
+"Atividades" = "Atividades";
+"Personalizado" = "Personalizado";
+"Já neste dia" = "Já neste dia";
+"Nome da atividade" = "Nome da atividade";
+"Ex: Jantar no Disney Springs" = "Ex: Jantar no Disney Springs";
+"Buscar atividade..." = "Buscar atividade...";
+"Adicione uma nota..." = "Adicione uma nota...";
+"Atividade" = "Atividade";
+
+/* Tools */
+"Ferramentas" = "Ferramentas";
+"Câmbio e impostos" = "Câmbio e impostos";
+"Câmbio" = "Câmbio";
+"Imposto" = "Imposto";
+"Tipo de pagamento" = "Tipo de pagamento";
+"Custo real estimado" = "Custo real estimado";
+"IOF (%@%%)" = "IOF (%@%%)";
+"Total de compras (US$)" = "Total de compras (US$)";
+"Meio de entrada no Brasil" = "Meio de entrada no Brasil";
+"Cota de isenção" = "Cota de isenção";
+"Valor tributável" = "Valor tributável";
+"Imposto estimado (20%%)" = "Imposto estimado (20%%)";
+"≈ em reais" = "≈ em reais";
+"Dentro da cota de isenção. Sem imposto." = "Dentro da cota de isenção. Sem imposto.";
+"Alíquota de 20%% sobre o valor excedente. Verifique as regras atuais da Receita Federal antes de viajar." = "Alíquota de 20%% sobre o valor excedente. Verifique as regras atuais da Receita Federal antes de viajar.";
+"Cotação offline. Última atualização: %@" = "Cotação offline. Última atualização: %@";
+
+/* Profile */
+"Perfil" = "Perfil";
+"Detalhes da viagem" = "Detalhes da viagem";
+"Editar" = "Editar";
+"Viajantes" = "Viajantes";
+"Saída" = "Saída";
+"Noites" = "Noites";
+"País" = "País";
+"Configurações" = "Configurações";
+"Notificações de prazo" = "Notificações de prazo";
+"Dados" = "Dados";
+"Reiniciar onboarding" = "Reiniciar onboarding";
+"Reiniciar?" = "Reiniciar?";
+"Todos os dados da viagem serão apagados." = "Todos os dados da viagem serão apagados.";
+"Reiniciar" = "Reiniciar";

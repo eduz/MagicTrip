@@ -1,0 +1,100 @@
+/* en — International / Casal Internacional persona */
+
+/* General */
+"Fechar" = "Close";
+"Cancelar" = "Cancel";
+"Salvar" = "Save";
+"Continuar" = "Continue";
+"Adicionar" = "Add";
+
+/* Onboarding */
+"Último passo" = "Last step";
+"Orçamento total (opcional)" = "Total budget (optional)";
+"Usado para calibrar dicas de economia. Fica salvo só no aparelho." = "Used to calibrate savings tips. Stored only on your device.";
+"Orçamento estimado" = "Estimated budget";
+"Gerar meu checklist" = "Generate my checklist";
+
+/* Checklist */
+"Sua viagem" = "Your trip";
+"Pra Orlando" = "To Orlando";
+"Em modo planejamento" = "In planning mode";
+"Progresso geral" = "Overall progress";
+"de" = "of";
+"tarefas" = "tasks";
+"dias até a viagem" = "days to trip";
+"ECONOMIA ESTIMADA" = "ESTIMATED SAVINGS";
+"Modo planejamento. Defina a data da viagem para liberar todas as tarefas com prazo." = "**Planning mode.** Set your travel date to unlock all deadline tasks.";
+"Nova" = "New";
+"Aguarda data" = "Awaiting date";
+"Hoje" = "Today";
+"por pessoa" = "per person";
+"compartilhado" = "shared";
+"Marcar como feita" = "Mark as done";
+"Salvar resposta" = "Save answer";
+"Pular" = "Skip";
+"Reabrir" = "Reopen";
+"Por que esta tarefa apareceu?" = "Why did this task appear?";
+"Selecione os parques" = "Select parks";
+"Comparar épocas" = "Compare seasons";
+"Dicas" = "Tips";
+"Dicas de economia" = "Savings tips";
+
+/* Savings */
+"Economia estimada" = "Estimated savings";
+"Nenhuma dica de economia aplicada ainda." = "No savings tips applied yet.";
+"Dicas aplicadas" = "Applied tips";
+"O valor é estimado. Pode variar conforme promoções e disponibilidade." = "Amount is estimated. May vary by promotions and availability.";
+"Compartilhar" = "Share";
+
+/* Calendar */
+"Calendário" = "Calendar";
+"Dia a dia" = "Day by day";
+"Defina a data da viagem para usar o calendário" = "Set your travel date to use the calendar";
+"Pronto para planejar seu roteiro?" = "Ready to plan your itinerary?";
+"Criar dias da viagem" = "Create trip days";
+"Adicionar atividade" = "Add activity";
+"Também planejado em" = "Also planned on";
+"Mover para outro dia" = "Move to another day";
+"Remover" = "Remove";
+"Mover para" = "Move to";
+"Parques" = "Parks";
+"Atividades" = "Activities";
+"Personalizado" = "Custom";
+"Já neste dia" = "Already on this day";
+"Nome da atividade" = "Activity name";
+"Ex: Jantar no Disney Springs" = "e.g. Dinner at Disney Springs";
+"Buscar atividade..." = "Search activity...";
+"Adicione uma nota..." = "Add a note...";
+"Atividade" = "Activity";
+
+/* Tools */
+"Ferramentas" = "Tools";
+"Câmbio e impostos" = "Currency & taxes";
+"Câmbio" = "Currency";
+"Imposto" = "Import tax";
+"Tipo de pagamento" = "Payment type";
+"Custo real estimado" = "Estimated real cost";
+"Total de compras (US$)" = "Total purchases (US$)";
+"Meio de entrada no Brasil" = "Entry mode into Brazil";
+"Cota de isenção" = "Duty-free quota";
+"Valor tributável" = "Taxable amount";
+"Imposto estimado (20%%)" = "Estimated tax (20%%)";
+"≈ em reais" = "≈ in BRL";
+"Dentro da cota de isenção. Sem imposto." = "Within duty-free quota. No tax.";
+"Cotação offline. Última atualização: %@" = "Offline rate. Last updated: %@";
+
+/* Profile */
+"Perfil" = "Profile";
+"Detalhes da viagem" = "Trip details";
+"Editar" = "Edit";
+"Viajantes" = "Travelers";
+"Saída" = "Departure";
+"Noites" = "Nights";
+"País" = "Country";
+"Configurações" = "Settings";
+"Notificações de prazo" = "Deadline notifications";
+"Dados" = "Data";
+"Reiniciar onboarding" = "Reset onboarding";
+"Reiniciar?" = "Reset?";
+"Todos os dados da viagem serão apagados." = "All trip data will be deleted.";
+"Reiniciar" = "Reset";

@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>MagicTrip · Editor de Catálogo</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --border: #e3e5e8;
+    --border-strong: #c9ccd1;
+    --text: #1c1d20;
+    --muted: #6b7077;
+    --accent: #5a3ddf;
+    --accent-soft: #ede9fd;
+    --danger: #c63838;
+    --ok: #2c8a4a;
+    --warn: #b87600;
+    --chip: #eef0f3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  header.app {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  header.app h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  header.app .spacer { flex: 1; }
+  header.app .tabs { display: flex; gap: 4px; }
+  header.app .tabs button {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  header.app .tabs button.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent-soft);
+    font-weight: 600;
+  }
+  header.app .tabs button:hover:not(.active) {
+    background: #f0f1f3;
+    color: var(--text);
+  }
+  .file-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  button.btn {
+    background: var(--accent);
+    color: white;
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  button.btn:hover { filter: brightness(0.95); }
+  button.btn.secondary {
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+  }
+  button.btn.danger { background: var(--danger); }
+  button.btn.ghost { background: transparent; color: var(--muted); padding: 4px 8px; }
+  button.btn.ghost:hover { color: var(--text); background: var(--chip); }
+  button.btn.sm { padding: 3px 8px; font-size: 12px; }
+  button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  main.tab-content { display: none; padding: 16px 18px; }
+  main.tab-content.active { display: block; }
+
+  /* Tasks layout */
+  .tasks-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .task-list { max-height: calc(100vh - 130px); overflow-y: auto; }
+  .task-list .filters {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+  }
+  .task-list .filters input,
+  .task-list .filters select {
+    font-size: 12px;
+    padding: 4px 6px;
+    border: 1px solid var(--border-strong);
+    border-radius: 5px;
+    background: white;
+  }
+  .task-list .filters input[type="search"] { flex: 1; min-width: 100px; }
+  .task-list ul { list-style: none; padding: 0; margin: 0; }
+  .task-list li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 2px;
+  }
+  .task-list li:hover { background: var(--chip); }
+  .task-list li.selected {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .task-list li .tid {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .task-list li .ttitle {
+    display: block; font-size: 13px; line-height: 1.3;
+    color: var(--text);
+  }
+  .task-list li .tmeta {
+    margin-top: 3px; display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .chip {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--chip);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+  }
+  .chip.critical { background: #fde0e0; color: #a4262c; }
+  .chip.high     { background: #ffe6cc; color: #8a4500; }
+  .chip.medium   { background: #fff6cc; color: #7a5d00; }
+  .chip.low      { background: #e0eedd; color: #2c5a23; }
+  .chip.br       { background: #d3e4ff; color: #1d4d80; }
+  .chip.global   { background: #e8e6ff; color: #4a3ec0; }
+
+  /* Editor right panel */
+  .editor { padding: 14px 16px; }
+  .editor h2 {
+    margin: 0 0 4px 0; font-size: 16px;
+  }
+  .editor .subtitle { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+  .editor .row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .editor .field { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 120px; }
+  .editor .field.full { flex-basis: 100%; }
+  .editor label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .editor input[type="text"],
+  .editor input[type="number"],
+  .editor input[type="url"],
+  .editor textarea,
+  .editor select {
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font: inherit;
+    background: white;
+    width: 100%;
+  }
+  .editor textarea { min-height: 60px; resize: vertical; }
+  .editor input:focus, .editor textarea:focus, .editor select:focus {
+    outline: 2px solid var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .editor fieldset {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 0 0 12px 0;
+  }
+  .editor legend {
+    padding: 0 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .editor .sub-card {
+    background: #fafbfd;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+  }
+  .editor .sub-card .card-head {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .editor .sub-card .card-head .grow { flex: 1; }
+  .editor .add-btn { font-size: 12px; }
+  .editor .trigger-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 12px;
+  }
+  .editor .trigger-grid label.cb {
+    display: flex; align-items: center; gap: 6px;
+    text-transform: none; letter-spacing: 0; font-weight: 400;
+    font-size: 13px; color: var(--text);
+  }
+  .editor .empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 300px; color: var(--muted); text-align: center;
+  }
+  .editor .row.tight { gap: 6px; }
+  .editor .inline-bool {
+    display: flex; align-items: center; gap: 6px; padding-top: 18px;
+    text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text); font-size: 13px;
+  }
+
+  /* Table-based editors */
+  .table-editor table { width: 100%; border-collapse: collapse; }
+  .table-editor th, .table-editor td {
+    border: 1px solid var(--border);
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .table-editor th {
+    background: #fafbfd;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--muted);
+  }
+  .table-editor input[type="text"],
+  .table-editor input[type="number"],
+  .table-editor input[type="url"],
+  .table-editor textarea,
+  .table-editor select {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 4px 6px;
+    font: inherit;
+    width: 100%;
+    border-radius: 4px;
+  }
+  .table-editor input:focus,
+  .table-editor textarea:focus,
+  .table-editor select:focus {
+    background: white;
+    outline: 2px solid var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .table-editor textarea { min-height: 36px; resize: vertical; }
+  .table-editor td.actions { width: 1%; white-space: nowrap; }
+
+  /* Toast */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1c1d20;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    transform: translateY(80px);
+    transition: transform 0.2s;
+    z-index: 200;
+    max-width: 300px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  #toast.show { transform: translateY(0); }
+  #toast.err { background: var(--danger); }
+  #toast.ok  { background: var(--ok); }
+
+  .help {
+    font-size: 11px; color: var(--muted); margin-top: 2px;
+  }
+  .hidden { display: none !important; }
+  .toolbar-spacer { flex: 1; }
+
+  details > summary {
+    cursor: pointer;
+    padding: 4px 0;
+    font-size: 12px;
+    color: var(--accent);
+    user-select: none;
+  }
+  details[open] > summary { margin-bottom: 6px; }
+
+  .file-name { font-size: 12px; color: var(--muted); margin-left: 6px; }
+</style>
+</head>
+<body>
+
+<header class="app">
+  <h1>MagicTrip · Editor de Catálogo</h1>
+  <div class="tabs">
+    <button data-tab="tasks" class="active">Tasks</button>
+    <button data-tab="seasonality">Sazonalidade</button>
+    <button data-tab="activities">Atividades</button>
+    <button data-tab="countries">Países</button>
+  </div>
+  <div class="spacer"></div>
+  <div class="file-actions">
+    <input type="file" id="file-input" accept="application/json,.json" class="hidden">
+    <button class="btn secondary" id="btn-load">Carregar JSON…</button>
+    <button class="btn" id="btn-download">Baixar JSON</button>
+    <span class="file-name" id="file-name"></span>
+  </div>
+</header>
+
+<!-- TASKS TAB -->
+<main class="tab-content active" id="tab-tasks">
+  <div class="tasks-layout">
+    <aside class="panel task-list">
+      <div class="filters">
+        <input type="search" id="task-search" placeholder="Buscar id ou título…">
+        <select id="task-filter-category">
+          <option value="">Todas categorias</option>
+        </select>
+        <select id="task-filter-scope">
+          <option value="">Todos escopos</option>
+          <option value="GLOBAL">GLOBAL</option>
+          <option value="BR">BR</option>
+        </select>
+        <button class="btn sm" id="btn-new-task">+ Nova</button>
+      </div>
+      <ul id="task-ul"></ul>
+    </aside>
+    <section class="panel editor" id="task-editor">
+      <div class="empty-state">
+        <p>Selecione uma task à esquerda<br>ou clique <strong>+ Nova</strong> para criar.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- SEASONALITY TAB -->
+<main class="tab-content" id="tab-seasonality">
+  <div class="panel table-editor">
+    <div style="display:flex; align-items:center; margin-bottom:10px; gap:10px;">
+      <h2 style="margin:0; font-size:15px;">Sazonalidade mensal</h2>
+      <span class="help">Eventos separados por <strong>vírgula</strong>. BestFor: Economia, Famílias, Casais, Idosos, Halloween.</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:40px">M</th>
+          <th style="width:60px">Nome</th>
+          <th>Lotação</th>
+          <th>Temp °F</th>
+          <th>Chuva %</th>
+          <th>Preço</th>
+          <th>Eventos</th>
+          <th>BestFor</th>
+          <th>Resumo</th>
+        </tr>
+      </thead>
+      <tbody id="season-tbody"></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- ACTIVITIES TAB -->
+<main class="tab-content" id="tab-activities">
+  <div class="panel table-editor">
+    <div style="display:flex; align-items:center; margin-bottom:10px; gap:10px;">
+      <h2 style="margin:0; font-size:15px;">Atividades comuns</h2>
+      <button class="btn sm" id="btn-new-activity">+ Nova</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px">ID</th>
+          <th style="width:140px">Categoria</th>
+          <th>Título</th>
+          <th style="width:140px">Duração</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="activity-tbody"></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- COUNTRIES TAB -->
+<main class="tab-content" id="tab-countries">
+  <div class="panel table-editor">
+    <div style="display:flex; align-items:center; margin-bottom:10px; gap:10px;">
+      <h2 style="margin:0; font-size:15px;">Países</h2>
+      <button class="btn sm" id="btn-new-country">+ Novo</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px">Código</th>
+          <th>Nome</th>
+          <th style="width:80px">Bandeira</th>
+          <th style="width:80px">Fixado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="country-tbody"></tbody>
+    </table>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   MagicTrip Catalog Editor
+   Single-file, runs offline. Save loads/saves the 4 JSON files
+   used by CatalogLoader.swift:
+     - tasks.json
+     - seasonality.json
+     - common_activities.json
+     - countries.json
+   ============================================================ */
+
+// ---------- Enums / domain ----------
+const CATEGORIES = [
+  ["planning",      "Planning"],
+  ["documentation", "Documentation"],
+  ["finance",       "Finance"],
+  ["lodging",       "Lodging"],
+  ["transport",     "Transport"],
+  ["parks",         "Parks"],
+  ["daily",         "Daily logistics"],
+  ["shopping",      "Shopping"],
+  ["health",        "Health"],
+  ["return",        "Return home"],
+];
+const PRIORITIES = ["critical", "high", "medium", "low"];
+const SCOPES = ["GLOBAL", "BR"];
+const TASK_TYPES = [
+  ["",                     "action (padrão)"],
+  ["decision",             "decision"],
+  ["multi_select_grouped", "multi_select_grouped"],
+  ["confirmation",         "confirmation"],
+];
+const TRIGGER_BOOLS = [
+  ["hasVisa",       "tem visto"],
+  ["hasPassport",   "tem passaporte"],
+  ["hasSeniors",    "tem idoso"],
+  ["needsMobility", "precisa mobilidade"],
+  ["hasYoungKid",   "tem criança pequena"],
+  ["hasKidUnder10", "tem criança <10"],
+  ["allAdults",     "só adultos"],
+  ["durationLong",  "viagem longa"],
+  ["isFirstTrip",   "primeira viagem"],
+];
+const PLANNING_OPTS = [["", "(qualquer)"], ["undecided", "indeciso"], ["decided", "decidido"]];
+
+// ---------- State ----------
+const state = {
+  active: "tasks",
+  tasks: [],
+  seasonality: [],
+  activities: [],
+  countries: [],
+  selectedTaskId: null,
+  fileNames: {
+    tasks: "tasks.json",
+    seasonality: "seasonality.json",
+    activities: "common_activities.json",
+    countries: "countries.json",
+  },
+};
+
+// ---------- Utilities ----------
+function $(sel, root = document) { return root.querySelector(sel); }
+function $$(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "html") node.innerHTML = v;
+    else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+    else if (v !== null && v !== undefined && v !== false) node.setAttribute(k, v);
+  }
+  for (const c of children) {
+    if (c == null) continue;
+    if (Array.isArray(c)) c.forEach(x => x && node.appendChild(typeof x === "string" ? document.createTextNode(x) : x));
+    else node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+  }
+  return node;
+}
+function uid(prefix = "id") {
+  return prefix + "-" + Math.random().toString(36).slice(2, 8);
+}
+function toast(msg, type = "ok") {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.className = "show " + type;
+  clearTimeout(toast._tid);
+  toast._tid = setTimeout(() => { t.className = ""; }, 2400);
+}
+function download(filename, content) {
+  const blob = new Blob([content], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function deepClone(v) { return JSON.parse(JSON.stringify(v)); }
+
+// Strip empty/null/undefined for clean JSON output
+function clean(v) {
+  if (Array.isArray(v)) {
+    const arr = v.map(clean).filter(x => x !== undefined);
+    return arr;
+  }
+  if (v && typeof v === "object") {
+    const out = {};
+    for (const [k, val] of Object.entries(v)) {
+      const cv = clean(val);
+      if (cv === undefined) continue;
+      if (cv === null) continue;
+      if (typeof cv === "string" && cv === "") continue;
+      if (Array.isArray(cv) && cv.length === 0) continue;
+      if (typeof cv === "object" && !Array.isArray(cv) && Object.keys(cv).length === 0) continue;
+      out[k] = cv;
+    }
+    return out;
+  }
+  return v;
+}
+
+// ---------- Tab switching ----------
+$$("header.app .tabs button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+    state.active = tab;
+    $$("header.app .tabs button").forEach(b => b.classList.toggle("active", b === btn));
+    $$("main.tab-content").forEach(m => m.classList.toggle("active", m.id === "tab-" + tab));
+    $("#file-name").textContent = state.fileNames[tab] || "";
+  });
+});
+
+// ---------- File load / download ----------
+$("#btn-load").addEventListener("click", () => $("#file-input").click());
+$("#file-input").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    if (!Array.isArray(parsed)) throw new Error("JSON deve ser um array.");
+    state.fileNames[state.active] = file.name;
+    switch (state.active) {
+      case "tasks":       state.tasks = parsed; renderTaskList(); clearTaskEditor(); break;
+      case "seasonality": state.seasonality = parsed; renderSeason(); break;
+      case "activities":  state.activities = parsed; renderActivities(); break;
+      case "countries":   state.countries = parsed; renderCountries(); break;
+    }
+    $("#file-name").textContent = file.name;
+    toast("Carregado: " + file.name);
+  } catch (err) {
+    toast("Erro: " + err.message, "err");
+  }
+  e.target.value = "";
+});
+
+$("#btn-download").addEventListener("click", () => {
+  let data, name;
+  switch (state.active) {
+    case "tasks":       data = state.tasks.map(cleanTask); name = state.fileNames.tasks; break;
+    case "seasonality": data = state.seasonality.map(cleanSeason); name = state.fileNames.seasonality; break;
+    case "activities":  data = state.activities.map(cleanActivity); name = state.fileNames.activities; break;
+    case "countries":   data = state.countries.map(cleanCountry); name = state.fileNames.countries; break;
+  }
+  if (!Array.isArray(data) || data.length === 0) {
+    toast("Nada para baixar — carregue ou crie itens primeiro.", "err");
+    return;
+  }
+  download(name, JSON.stringify(data, null, 2) + "\n");
+  toast("Baixado: " + name);
+});
+
+// ============================================================
+// TASKS
+// ============================================================
+
+// Cleaners that strip empty optional fields before save
+function cleanTask(t) {
+  const out = {
+    id: t.id,
+    title: t.title,
+    category: t.category,
+  };
+  if (t.taskType) out.taskType = t.taskType;
+  out.priority = t.priority;
+  out.deadlineDays = (t.deadlineDays === "" || t.deadlineDays == null) ? null : Number(t.deadlineDays);
+  out.requiresDate = !!t.requiresDate;
+  out.scope = t.scope || "GLOBAL";
+  out.description = t.description || "";
+  if (t.moreInfoUrl)   out.moreInfoUrl   = t.moreInfoUrl;
+  if (t.moreInfoLabel) out.moreInfoLabel = t.moreInfoLabel;
+  out.tips = (t.tips || []).map(cleanTip);
+  out.savings = (t.savings || []).map(cleanSavings);
+  out.triggers = cleanTriggers(t.triggers || {});
+  const req = (t.requires || []).map(cleanRequire).filter(r => r.task);
+  if (req.length) out.requires = req;
+  if (t.conditionalDeadline && t.conditionalDeadline.rules && t.conditionalDeadline.rules.length) {
+    out.conditionalDeadline = {
+      rules: t.conditionalDeadline.rules.map(r => ({
+        condition: cleanRequire(r.condition || { task: "" }),
+        days: Number(r.days) || 0,
+      })),
+      fallbackDays: Number(t.conditionalDeadline.fallbackDays) || 0,
+    };
+  }
+  if (t.decision && t.decision.question) {
+    out.decision = {
+      question: t.decision.question,
+      options: (t.decision.options || []).map(o => {
+        const oo = { id: o.id, label: o.label };
+        if (o.subtitle) oo.subtitle = o.subtitle;
+        return oo;
+      }),
+    };
+  }
+  if (t.groups && t.groups.length) {
+    out.groups = t.groups.map(g => ({
+      id: g.id,
+      label: g.label,
+      options: (g.options || []).map(o => {
+        const oo = { id: o.id, label: o.label };
+        if (o.recommendedVisits != null && o.recommendedVisits !== "") oo.recommendedVisits = Number(o.recommendedVisits);
+        if (o.moreInfoUrl)   oo.moreInfoUrl   = o.moreInfoUrl;
+        if (o.moreInfoLabel) oo.moreInfoLabel = o.moreInfoLabel;
+        return oo;
+      }),
+    }));
+  }
+  return out;
+}
+
+function cleanTip(tip) {
+  const out = { id: tip.id || uid("t"), title: tip.title || "", description: tip.description || "" };
+  if (tip.moreInfoUrl)   out.moreInfoUrl   = tip.moreInfoUrl;
+  if (tip.moreInfoLabel) out.moreInfoLabel = tip.moreInfoLabel;
+  if (tip.applicableConditions) {
+    const ac = cleanTriggers(tip.applicableConditions);
+    if (Object.keys(ac).length) out.applicableConditions = ac;
+  }
+  return out;
+}
+
+function cleanSavings(s) {
+  const out = {
+    id: s.id || uid("s"),
+    title: s.title || "",
+    description: s.description || "",
+    usd: Number(s.usd) || 0,
+  };
+  if (s.scope === "shared") out.scope = "shared";
+  if (s.moreInfoUrl)   out.moreInfoUrl   = s.moreInfoUrl;
+  if (s.moreInfoLabel) out.moreInfoLabel = s.moreInfoLabel;
+  if (s.applicableConditions) {
+    const ac = cleanTriggers(s.applicableConditions);
+    if (Object.keys(ac).length) out.applicableConditions = ac;
+  }
+  return out;
+}
+
+function cleanTriggers(t) {
+  const out = {};
+  if (t.country) out.country = t.country;
+  if (t.planning) out.planning = t.planning;
+  for (const [k] of TRIGGER_BOOLS) {
+    if (t[k] === true)  out[k] = true;
+    if (t[k] === false) out[k] = false;
+  }
+  return out;
+}
+
+function cleanRequire(r) {
+  const out = { task: r.task || "" };
+  if (r.answerIn && r.answerIn.length) out.answerIn = r.answerIn;
+  if (r.answerContainsAny && r.answerContainsAny.length) out.answerContainsAny = r.answerContainsAny;
+  if (r.answerContainsAll && r.answerContainsAll.length) out.answerContainsAll = r.answerContainsAll;
+  return out;
+}
+
+// Populate category filter
+(function initCategoryFilter() {
+  const sel = $("#task-filter-category");
+  CATEGORIES.forEach(([v, l]) => sel.appendChild(el("option", { value: v }, l)));
+})();
+
+$("#task-search").addEventListener("input", renderTaskList);
+$("#task-filter-category").addEventListener("change", renderTaskList);
+$("#task-filter-scope").addEventListener("change", renderTaskList);
+
+$("#btn-new-task").addEventListener("click", () => {
+  const id = prompt("ID da nova task (ex: PL-99):", "");
+  if (!id) return;
+  if (state.tasks.some(t => t.id === id)) {
+    toast("ID já existe.", "err");
+    return;
+  }
+  const newTask = {
+    id,
+    title: "Nova task",
+    category: "planning",
+    priority: "medium",
+    deadlineDays: null,
+    requiresDate: false,
+    scope: "GLOBAL",
+    description: "",
+    tips: [],
+    savings: [],
+    triggers: {},
+  };
+  state.tasks.push(newTask);
+  state.selectedTaskId = id;
+  renderTaskList();
+  renderTaskEditor();
+});
+
+function renderTaskList() {
+  const ul = $("#task-ul");
+  ul.innerHTML = "";
+  const q = $("#task-search").value.toLowerCase().trim();
+  const cat = $("#task-filter-category").value;
+  const sc = $("#task-filter-scope").value;
+  const filtered = state.tasks.filter(t => {
+    if (cat && t.category !== cat) return false;
+    if (sc && t.scope !== sc) return false;
+    if (q && !(t.id.toLowerCase().includes(q) || (t.title || "").toLowerCase().includes(q))) return false;
+    return true;
+  });
+  if (filtered.length === 0) {
+    ul.appendChild(el("li", { style: "color:var(--muted); cursor:default;" }, "Nenhuma task."));
+    return;
+  }
+  filtered.forEach(t => {
+    const li = el("li", {
+      class: state.selectedTaskId === t.id ? "selected" : "",
+      onclick: () => { state.selectedTaskId = t.id; renderTaskList(); renderTaskEditor(); },
+    },
+      el("span", { class: "tid" }, t.id),
+      el("span", { class: "ttitle" }, t.title || "(sem título)"),
+      el("div", { class: "tmeta" },
+        el("span", { class: "chip " + (t.priority || "") }, t.priority || "?"),
+        el("span", { class: "chip " + (t.scope === "BR" ? "br" : "global") }, t.scope || "?"),
+        t.taskType ? el("span", { class: "chip" }, t.taskType) : null,
+      ),
+    );
+    ul.appendChild(li);
+  });
+}
+
+function clearTaskEditor() {
+  state.selectedTaskId = null;
+  const ed = $("#task-editor");
+  ed.innerHTML = '<div class="empty-state"><p>Selecione uma task à esquerda<br>ou clique <strong>+ Nova</strong> para criar.</p></div>';
+}
+
+function renderTaskEditor() {
+  const ed = $("#task-editor");
+  ed.innerHTML = "";
+  const t = state.tasks.find(x => x.id === state.selectedTaskId);
+  if (!t) { clearTaskEditor(); return; }
+
+  // Helpers that mutate t and re-render where needed
+  const onField = (key) => (e) => {
+    let v = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    if (key === "deadlineDays") v = v === "" ? null : Number(v);
+    t[key] = v;
+    if (key === "id" || key === "title" || key === "priority" || key === "scope" || key === "taskType") {
+      renderTaskList();
+    }
+  };
+
+  // ----- Header -----
+  ed.appendChild(el("div", { class: "row" },
+    el("div", { class: "field", style: "flex:0 0 120px;" },
+      el("label", {}, "ID"),
+      el("input", { type: "text", value: t.id, oninput: onField("id") }),
+    ),
+    el("div", { class: "field" },
+      el("label", {}, "Título"),
+      el("input", { type: "text", value: t.title || "", oninput: onField("title") }),
+    ),
+    el("div", { class: "field", style: "flex:0 0 90px;" },
+      el("label", {}, ""),
+      el("button", { class: "btn danger", onclick: () => {
+        if (confirm("Apagar task " + t.id + "?")) {
+          state.tasks = state.tasks.filter(x => x.id !== t.id);
+          state.selectedTaskId = null;
+          renderTaskList();
+          clearTaskEditor();
+        }
+      } }, "Apagar"),
+    ),
+  ));
+
+  // ----- Meta row -----
+  ed.appendChild(el("div", { class: "row" },
+    el("div", { class: "field" },
+      el("label", {}, "Categoria"),
+      selectFrom(t.category, CATEGORIES, onField("category")),
+    ),
+    el("div", { class: "field" },
+      el("label", {}, "Prioridade"),
+      selectFrom(t.priority, PRIORITIES.map(p => [p, p]), onField("priority")),
+    ),
+    el("div", { class: "field" },
+      el("label", {}, "Escopo"),
+      selectFrom(t.scope, SCOPES.map(s => [s, s]), onField("scope")),
+    ),
+    el("div", { class: "field" },
+      el("label", {}, "Tipo"),
+      selectFrom(t.taskType || "", TASK_TYPES, onField("taskType")),
+    ),
+    el("div", { class: "field", style: "flex:0 0 110px;" },
+      el("label", {}, "DeadlineDays"),
+      el("input", { type: "number", value: t.deadlineDays ?? "", oninput: onField("deadlineDays") }),
+    ),
+    el("div", { class: "field", style: "flex:0 0 130px;" },
+      el("label", { class: "inline-bool" },
+        checkbox(!!t.requiresDate, onField("requiresDate")),
+        "requiresDate",
+      ),
+    ),
+  ));
+
+  // ----- Description -----
+  ed.appendChild(el("div", { class: "row" },
+    el("div", { class: "field full" },
+      el("label", {}, "Descrição"),
+      el("textarea", { oninput: onField("description") }, t.description || ""),
+    ),
+  ));
+
+  // ----- More info -----
+  ed.appendChild(el("details", {},
+    el("summary", {}, "Mais informações (URL externa)"),
+    el("div", { class: "row" },
+      el("div", { class: "field" },
+        el("label", {}, "moreInfoUrl"),
+        el("input", { type: "url", value: t.moreInfoUrl || "", oninput: onField("moreInfoUrl") }),
+      ),
+      el("div", { class: "field" },
+        el("label", {}, "moreInfoLabel"),
+        el("input", { type: "text", value: t.moreInfoLabel || "", oninput: onField("moreInfoLabel") }),
+      ),
+    ),
+  ));
+
+  // ----- Triggers -----
+  const triggers = t.triggers = t.triggers || {};
+  const triggerFs = el("fieldset", {},
+    el("legend", {}, "Triggers (quando a task aparece)"),
+    el("div", { class: "row" },
+      el("div", { class: "field" },
+        el("label", {}, "country"),
+        el("input", { type: "text", value: triggers.country || "", placeholder: "ex: BR",
+          oninput: e => { triggers.country = e.target.value; } }),
+      ),
+      el("div", { class: "field" },
+        el("label", {}, "planning"),
+        selectFrom(triggers.planning || "", PLANNING_OPTS, e => { triggers.planning = e.target.value || undefined; }),
+      ),
+    ),
+    el("div", { class: "trigger-grid" },
+      ...TRIGGER_BOOLS.map(([k, label]) => triBoolControl(triggers, k, label)),
+    ),
+  );
+  ed.appendChild(triggerFs);
+
+  // ----- Tips -----
+  ed.appendChild(repeatingFs({
+    legend: "Dicas (tips)",
+    items: (t.tips ||= []),
+    add: () => t.tips.push({ id: uid("t"), title: "", description: "" }),
+    render: (tip, i) => tipCard(tip, i, t.tips),
+  }));
+
+  // ----- Savings -----
+  ed.appendChild(repeatingFs({
+    legend: "Economias (savings)",
+    items: (t.savings ||= []),
+    add: () => t.savings.push({ id: uid("s"), title: "", description: "", usd: 0 }),
+    render: (s, i) => savingsCard(s, i, t.savings),
+  }));
+
+  // ----- Requires -----
+  ed.appendChild(repeatingFs({
+    legend: "Pré-requisitos (requires)",
+    items: (t.requires ||= []),
+    add: () => t.requires.push({ task: "", answerIn: [] }),
+    render: (r, i) => requireCard(r, i, t.requires),
+  }));
+
+  // ----- Conditional deadline -----
+  const cdFs = el("fieldset", {},
+    el("legend", {}, "Deadline condicional (opcional)"),
+  );
+  const cdEnabled = !!t.conditionalDeadline;
+  cdFs.appendChild(el("label", { class: "inline-bool", style: "padding-top:0; margin-bottom:6px;" },
+    checkbox(cdEnabled, e => {
+      if (e.target.checked) t.conditionalDeadline = { rules: [], fallbackDays: 0 };
+      else delete t.conditionalDeadline;
+      renderTaskEditor();
+    }),
+    "Habilitar deadline condicional",
+  ));
+  if (cdEnabled) {
+    const cd = t.conditionalDeadline;
+    cdFs.appendChild(el("div", { class: "row" },
+      el("div", { class: "field", style: "flex:0 0 140px;" },
+        el("label", {}, "fallbackDays"),
+        el("input", { type: "number", value: cd.fallbackDays ?? 0, oninput: e => { cd.fallbackDays = Number(e.target.value); } }),
+      ),
+    ));
+    (cd.rules ||= []).forEach((rule, i) => {
+      const card = el("div", { class: "sub-card" },
+        el("div", { class: "card-head" },
+          el("strong", { class: "grow" }, "Regra " + (i+1)),
+          el("button", { class: "btn ghost sm", onclick: () => { cd.rules.splice(i,1); renderTaskEditor(); } }, "Remover"),
+        ),
+        el("div", { class: "row" },
+          el("div", { class: "field", style: "flex:0 0 120px;" },
+            el("label", {}, "days"),
+            el("input", { type: "number", value: rule.days ?? 0, oninput: e => { rule.days = Number(e.target.value); } }),
+          ),
+        ),
+        requireCardInner(rule.condition ||= { task: "" }),
+      );
+      cdFs.appendChild(card);
+    });
+    cdFs.appendChild(el("button", { class: "btn sm secondary", onclick: () => {
+      cd.rules.push({ condition: { task: "" }, days: 0 });
+      renderTaskEditor();
+    } }, "+ Regra"));
+  }
+  ed.appendChild(cdFs);
+
+  // ----- Decision (if taskType=decision) -----
+  if (t.taskType === "decision") {
+    t.decision ||= { question: "", options: [] };
+    const dFs = el("fieldset", {},
+      el("legend", {}, "Decisão"),
+      el("div", { class: "row" },
+        el("div", { class: "field full" },
+          el("label", {}, "Pergunta"),
+          el("input", { type: "text", value: t.decision.question || "", oninput: e => { t.decision.question = e.target.value; } }),
+        ),
+      ),
+    );
+    (t.decision.options ||= []).forEach((o, i) => {
+      const card = el("div", { class: "sub-card" },
+        el("div", { class: "card-head" },
+          el("strong", { class: "grow" }, "Opção " + (i+1)),
+          el("button", { class: "btn ghost sm", onclick: () => { t.decision.options.splice(i,1); renderTaskEditor(); } }, "Remover"),
+        ),
+        el("div", { class: "row" },
+          el("div", { class: "field", style: "flex:0 0 150px;" },
+            el("label", {}, "id"),
+            el("input", { type: "text", value: o.id || "", oninput: e => { o.id = e.target.value; } }),
+          ),
+          el("div", { class: "field" },
+            el("label", {}, "label"),
+            el("input", { type: "text", value: o.label || "", oninput: e => { o.label = e.target.value; } }),
+          ),
+        ),
+        el("div", { class: "row" },
+          el("div", { class: "field full" },
+            el("label", {}, "subtitle"),
+            el("input", { type: "text", value: o.subtitle || "", oninput: e => { o.subtitle = e.target.value; } }),
+          ),
+        ),
+      );
+      dFs.appendChild(card);
+    });
+    dFs.appendChild(el("button", { class: "btn sm secondary", onclick: () => {
+      t.decision.options.push({ id: "", label: "", subtitle: "" });
+      renderTaskEditor();
+    } }, "+ Opção"));
+    ed.appendChild(dFs);
+  }
+
+  // ----- Groups (if taskType=multi_select_grouped) -----
+  if (t.taskType === "multi_select_grouped") {
+    t.groups ||= [];
+    const gFs = el("fieldset", {},
+      el("legend", {}, "Grupos de opções"),
+    );
+    t.groups.forEach((g, gi) => {
+      const card = el("div", { class: "sub-card" },
+        el("div", { class: "card-head" },
+          el("strong", { class: "grow" }, "Grupo " + (gi+1)),
+          el("button", { class: "btn ghost sm", onclick: () => { t.groups.splice(gi,1); renderTaskEditor(); } }, "Remover grupo"),
+        ),
+        el("div", { class: "row" },
+          el("div", { class: "field", style: "flex:0 0 160px;" },
+            el("label", {}, "id"),
+            el("input", { type: "text", value: g.id || "", oninput: e => { g.id = e.target.value; } }),
+          ),
+          el("div", { class: "field" },
+            el("label", {}, "label"),
+            el("input", { type: "text", value: g.label || "", oninput: e => { g.label = e.target.value; } }),
+          ),
+        ),
+      );
+      (g.options ||= []).forEach((o, oi) => {
+        card.appendChild(el("div", { class: "sub-card", style: "background:white;" },
+          el("div", { class: "card-head" },
+            el("strong", { class: "grow" }, "Opção " + (oi+1)),
+            el("button", { class: "btn ghost sm", onclick: () => { g.options.splice(oi,1); renderTaskEditor(); } }, "Remover"),
+          ),
+          el("div", { class: "row tight" },
+            el("div", { class: "field", style: "flex:0 0 140px;" },
+              el("label", {}, "id"),
+              el("input", { type: "text", value: o.id || "", oninput: e => { o.id = e.target.value; } }),
+            ),
+            el("div", { class: "field" },
+              el("label", {}, "label"),
+              el("input", { type: "text", value: o.label || "", oninput: e => { o.label = e.target.value; } }),
+            ),
+            el("div", { class: "field", style: "flex:0 0 100px;" },
+              el("label", {}, "recVisits"),
+              el("input", { type: "number", value: o.recommendedVisits ?? "", oninput: e => {
+                o.recommendedVisits = e.target.value === "" ? undefined : Number(e.target.value);
+              } }),
+            ),
+          ),
+          el("div", { class: "row tight" },
+            el("div", { class: "field" },
+              el("label", {}, "moreInfoUrl"),
+              el("input", { type: "url", value: o.moreInfoUrl || "", oninput: e => { o.moreInfoUrl = e.target.value; } }),
+            ),
+            el("div", { class: "field" },
+              el("label", {}, "moreInfoLabel"),
+              el("input", { type: "text", value: o.moreInfoLabel || "", oninput: e => { o.moreInfoLabel = e.target.value; } }),
+            ),
+          ),
+        ));
+      });
+      card.appendChild(el("button", { class: "btn sm secondary", onclick: () => {
+        g.options.push({ id: "", label: "" });
+        renderTaskEditor();
+      } }, "+ Opção"));
+      gFs.appendChild(card);
+    });
+    gFs.appendChild(el("button", { class: "btn sm secondary", onclick: () => {
+      t.groups.push({ id: "", label: "", options: [] });
+      renderTaskEditor();
+    } }, "+ Grupo"));
+    ed.appendChild(gFs);
+  }
+}
+
+// ---- Reusable form pieces ----
+function selectFrom(value, options, onchange) {
+  const sel = el("select", { onchange });
+  options.forEach(([v, l]) => {
+    const opt = el("option", { value: v }, l);
+    if (v === value) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  return sel;
+}
+function checkbox(checked, onchange) {
+  const i = el("input", { type: "checkbox", onchange });
+  i.checked = !!checked;
+  return i;
+}
+function triBoolControl(target, key, label) {
+  const sel = el("select", {
+    onchange: e => {
+      const v = e.target.value;
+      if (v === "") delete target[key];
+      else target[key] = (v === "true");
+    },
+  });
+  [["", "(qualquer)"], ["true", "sim"], ["false", "não"]].forEach(([v, l]) => {
+    const opt = el("option", { value: v }, l);
+    if ((target[key] === true && v === "true") ||
+        (target[key] === false && v === "false") ||
+        (target[key] === undefined && v === "")) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  return el("div", { style: "display:flex; flex-direction:column; gap:2px;" },
+    el("label", { style: "font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.4px; font-weight:600;" }, label),
+    sel,
+  );
+}
+function repeatingFs({ legend, items, add, render }) {
+  const fs = el("fieldset", {}, el("legend", {}, legend));
+  items.forEach((item, i) => fs.appendChild(render(item, i)));
+  fs.appendChild(el("button", { class: "btn sm secondary add-btn", onclick: () => { add(); renderTaskEditor(); } }, "+ Adicionar"));
+  return fs;
+}
+
+function tipCard(tip, i, arr) {
+  return el("div", { class: "sub-card" },
+    el("div", { class: "card-head" },
+      el("strong", { class: "grow" }, "Dica " + (i+1)),
+      el("button", { class: "btn ghost sm", onclick: () => { arr.splice(i,1); renderTaskEditor(); } }, "Remover"),
+    ),
+    el("div", { class: "row tight" },
+      el("div", { class: "field", style: "flex:0 0 140px;" },
+        el("label", {}, "id"),
+        el("input", { type: "text", value: tip.id || "", oninput: e => { tip.id = e.target.value; } }),
+      ),
+      el("div", { class: "field" },
+        el("label", {}, "Título"),
+        el("input", { type: "text", value: tip.title || "", oninput: e => { tip.title = e.target.value; } }),
+      ),
+    ),
+    el("div", { class: "row tight" },
+      el("div", { class: "field full" },
+        el("label", {}, "Descrição"),
+        el("textarea", { oninput: e => { tip.description = e.target.value; } }, tip.description || ""),
+      ),
+    ),
+    el("details", {},
+      el("summary", {}, "Mais info / condições aplicáveis"),
+      el("div", { class: "row tight" },
+        el("div", { class: "field" },
+          el("label", {}, "moreInfoUrl"),
+          el("input", { type: "url", value: tip.moreInfoUrl || "", oninput: e => { tip.moreInfoUrl = e.target.value; } }),
+        ),
+        el("div", { class: "field" },
+          el("label", {}, "moreInfoLabel"),
+          el("input", { type: "text", value: tip.moreInfoLabel || "", oninput: e => { tip.moreInfoLabel = e.target.value; } }),
+        ),
+      ),
+      conditionalConditionsControl(tip, "applicableConditions"),
+    ),
+  );
+}
+
+function savingsCard(s, i, arr) {
+  return el("div", { class: "sub-card" },
+    el("div", { class: "card-head" },
+      el("strong", { class: "grow" }, "Economia " + (i+1)),
+      el("button", { class: "btn ghost sm", onclick: () => { arr.splice(i,1); renderTaskEditor(); } }, "Remover"),
+    ),
+    el("div", { class: "row tight" },
+      el("div", { class: "field", style: "flex:0 0 140px;" },
+        el("label", {}, "id"),
+        el("input", { type: "text", value: s.id || "", oninput: e => { s.id = e.target.value; } }),
+      ),
+      el("div", { class: "field" },
+        el("label", {}, "Título"),
+        el("input", { type: "text", value: s.title || "", oninput: e => { s.title = e.target.value; } }),
+      ),
+      el("div", { class: "field", style: "flex:0 0 100px;" },
+        el("label", {}, "USD"),
+        el("input", { type: "number", value: s.usd ?? 0, oninput: e => { s.usd = Number(e.target.value); } }),
+      ),
+      el("div", { class: "field", style: "flex:0 0 120px;" },
+        el("label", {}, "Escopo"),
+        selectFrom(s.scope || "", [["", "per person"], ["shared", "shared"]],
+          e => { s.scope = e.target.value || undefined; }),
+      ),
+    ),
+    el("div", { class: "row tight" },
+      el("div", { class: "field full" },
+        el("label", {}, "Descrição"),
+        el("textarea", { oninput: e => { s.description = e.target.value; } }, s.description || ""),
+      ),
+    ),
+    el("details", {},
+      el("summary", {}, "Mais info / condições aplicáveis"),
+      el("div", { class: "row tight" },
+        el("div", { class: "field" },
+          el("label", {}, "moreInfoUrl"),
+          el("input", { type: "url", value: s.moreInfoUrl || "", oninput: e => { s.moreInfoUrl = e.target.value; } }),
+        ),
+        el("div", { class: "field" },
+          el("label", {}, "moreInfoLabel"),
+          el("input", { type: "text", value: s.moreInfoLabel || "", oninput: e => { s.moreInfoLabel = e.target.value; } }),
+        ),
+      ),
+      conditionalConditionsControl(s, "applicableConditions"),
+    ),
+  );
+}
+
+function conditionalConditionsControl(holder, key) {
+  const enabled = !!holder[key];
+  const wrap = el("div", { style: "margin-top:6px;" },
+    el("label", { class: "inline-bool", style: "padding-top:0;" },
+      checkbox(enabled, e => {
+        if (e.target.checked) holder[key] = {};
+        else delete holder[key];
+        renderTaskEditor();
+      }),
+      "Restringir por condições",
+    ),
+  );
+  if (enabled) {
+    const c = holder[key];
+    wrap.appendChild(el("div", { class: "row tight" },
+      el("div", { class: "field" },
+        el("label", {}, "country"),
+        el("input", { type: "text", value: c.country || "", oninput: e => { c.country = e.target.value; } }),
+      ),
+    ));
+    wrap.appendChild(el("div", { class: "trigger-grid" },
+      ...TRIGGER_BOOLS.map(([k, label]) => triBoolControl(c, k, label)),
+    ));
+  }
+  return wrap;
+}
+
+function requireCard(r, i, arr) {
+  return el("div", { class: "sub-card" },
+    el("div", { class: "card-head" },
+      el("strong", { class: "grow" }, "Requisito " + (i+1)),
+      el("button", { class: "btn ghost sm", onclick: () => { arr.splice(i,1); renderTaskEditor(); } }, "Remover"),
+    ),
+    requireCardInner(r),
+  );
+}
+
+function requireCardInner(r) {
+  // Allow either answerIn / answerContainsAny / answerContainsAll
+  const wrap = el("div", {});
+  wrap.appendChild(el("div", { class: "row tight" },
+    el("div", { class: "field", style: "flex:0 0 160px;" },
+      el("label", {}, "task ID"),
+      el("input", { type: "text", value: r.task || "", oninput: e => { r.task = e.target.value; } }),
+    ),
+  ));
+  wrap.appendChild(el("div", { class: "row tight" },
+    el("div", { class: "field" },
+      el("label", {}, "answerIn (vírgula)"),
+      el("input", { type: "text",
+        value: (r.answerIn || []).join(","),
+        placeholder: "yes_buy,yes_already_have",
+        oninput: e => { r.answerIn = splitCsv(e.target.value); } }),
+    ),
+  ));
+  wrap.appendChild(el("div", { class: "row tight" },
+    el("div", { class: "field" },
+      el("label", {}, "answerContainsAny (vírgula)"),
+      el("input", { type: "text",
+        value: (r.answerContainsAny || []).join(","),
+        placeholder: "disney_mk,disney_ep",
+        oninput: e => { r.answerContainsAny = splitCsv(e.target.value); } }),
+    ),
+    el("div", { class: "field" },
+      el("label", {}, "answerContainsAll (vírgula)"),
+      el("input", { type: "text",
+        value: (r.answerContainsAll || []).join(","),
+        oninput: e => { r.answerContainsAll = splitCsv(e.target.value); } }),
+    ),
+  ));
+  return wrap;
+}
+
+function splitCsv(s) {
+  return s.split(",").map(x => x.trim()).filter(Boolean);
+}
+
+// ============================================================
+// SEASONALITY
+// ============================================================
+const CROWD_OPTS = ["Baixa", "Média", "Alta", "Muito alta"];
+const PRICE_OPTS = ["Baixo", "Médio", "Alto"];
+
+function cleanSeason(s) {
+  const out = {
+    m: Number(s.m),
+    name: s.name || "",
+    crowd: s.crowd || "",
+    tempF: Number(s.tempF) || 0,
+    rain: Number(s.rain) || 0,
+    price: s.price || "",
+    events: Array.isArray(s.events) ? s.events : splitCsv(s.events || ""),
+    bestFor: Array.isArray(s.bestFor) ? s.bestFor : splitCsv(s.bestFor || ""),
+    summary: s.summary || "",
+  };
+  return out;
+}
+
+function renderSeason() {
+  const tbody = $("#season-tbody");
+  tbody.innerHTML = "";
+  // Always render in month order
+  const rows = state.seasonality.slice().sort((a, b) => Number(a.m) - Number(b.m));
+  if (rows.length === 0) {
+    tbody.appendChild(el("tr", {},
+      el("td", { colspan: "9", style: "text-align:center; color:var(--muted); padding:20px;" }, "Carregue seasonality.json"),
+    ));
+    return;
+  }
+  rows.forEach(r => {
+    tbody.appendChild(el("tr", {},
+      el("td", {}, el("input", { type: "number", value: r.m, oninput: e => { r.m = Number(e.target.value); } })),
+      el("td", {}, el("input", { type: "text", value: r.name || "", oninput: e => { r.name = e.target.value; } })),
+      el("td", {}, selectFromInline(r.crowd, CROWD_OPTS, v => r.crowd = v)),
+      el("td", {}, el("input", { type: "number", value: r.tempF ?? 0, oninput: e => { r.tempF = Number(e.target.value); } })),
+      el("td", {}, el("input", { type: "number", value: r.rain ?? 0, oninput: e => { r.rain = Number(e.target.value); } })),
+      el("td", {}, selectFromInline(r.price, PRICE_OPTS, v => r.price = v)),
+      el("td", {}, el("input", { type: "text",
+        value: (r.events || []).join(", "),
+        oninput: e => { r.events = splitCsv(e.target.value); } })),
+      el("td", {}, el("input", { type: "text",
+        value: (r.bestFor || []).join(", "),
+        oninput: e => { r.bestFor = splitCsv(e.target.value); } })),
+      el("td", {}, el("textarea", { oninput: e => { r.summary = e.target.value; } }, r.summary || "")),
+    ));
+  });
+}
+
+function selectFromInline(value, options, onchange) {
+  const sel = el("select", { onchange: e => onchange(e.target.value) });
+  options.forEach(v => {
+    const opt = el("option", { value: v }, v);
+    if (v === value) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  return sel;
+}
+
+// ============================================================
+// ACTIVITIES
+// ============================================================
+function cleanActivity(a) {
+  return {
+    id: a.id || "",
+    category: a.category || "",
+    title: a.title || "",
+    dur: a.dur || "",
+  };
+}
+
+$("#btn-new-activity").addEventListener("click", () => {
+  state.activities.push({ id: uid("act"), category: "", title: "", dur: "" });
+  renderActivities();
+});
+
+function renderActivities() {
+  const tbody = $("#activity-tbody");
+  tbody.innerHTML = "";
+  if (state.activities.length === 0) {
+    tbody.appendChild(el("tr", {},
+      el("td", { colspan: "5", style: "text-align:center; color:var(--muted); padding:20px;" },
+        "Carregue common_activities.json ou clique + Nova"),
+    ));
+    return;
+  }
+  state.activities.forEach((a, i) => {
+    tbody.appendChild(el("tr", {},
+      el("td", {}, el("input", { type: "text", value: a.id || "", oninput: e => { a.id = e.target.value; } })),
+      el("td", {}, el("input", { type: "text", value: a.category || "", oninput: e => { a.category = e.target.value; } })),
+      el("td", {}, el("input", { type: "text", value: a.title || "", oninput: e => { a.title = e.target.value; } })),
+      el("td", {}, el("input", { type: "text", value: a.dur || "", oninput: e => { a.dur = e.target.value; } })),
+      el("td", { class: "actions" },
+        el("button", { class: "btn ghost sm", onclick: () => {
+          if (confirm("Apagar?")) { state.activities.splice(i, 1); renderActivities(); }
+        } }, "✕"),
+      ),
+    ));
+  });
+}
+
+// ============================================================
+// COUNTRIES
+// ============================================================
+function cleanCountry(c) {
+  const out = {
+    code: c.code || "",
+    name: c.name || "",
+    flag: c.flag || "",
+  };
+  if (c.pinned) out.pinned = true;
+  return out;
+}
+
+$("#btn-new-country").addEventListener("click", () => {
+  state.countries.push({ code: "", name: "", flag: "", pinned: false });
+  renderCountries();
+});
+
+function renderCountries() {
+  const tbody = $("#country-tbody");
+  tbody.innerHTML = "";
+  if (state.countries.length === 0) {
+    tbody.appendChild(el("tr", {},
+      el("td", { colspan: "5", style: "text-align:center; color:var(--muted); padding:20px;" },
+        "Carregue countries.json ou clique + Novo"),
+    ));
+    return;
+  }
+  state.countries.forEach((c, i) => {
+    tbody.appendChild(el("tr", {},
+      el("td", {}, el("input", { type: "text", value: c.code || "", oninput: e => { c.code = e.target.value; } })),
+      el("td", {}, el("input", { type: "text", value: c.name || "", oninput: e => { c.name = e.target.value; } })),
+      el("td", {}, el("input", { type: "text", value: c.flag || "", oninput: e => { c.flag = e.target.value; } })),
+      el("td", { style: "text-align:center;" }, (() => {
+        const cb = el("input", { type: "checkbox", onchange: e => { c.pinned = e.target.checked; } });
+        cb.checked = !!c.pinned;
+        return cb;
+      })()),
+      el("td", { class: "actions" },
+        el("button", { class: "btn ghost sm", onclick: () => {
+          if (confirm("Apagar?")) { state.countries.splice(i, 1); renderCountries(); }
+        } }, "✕"),
+      ),
+    ));
+  });
+}
+
+// ---------- Initial render ----------
+renderTaskList();
+renderSeason();
+renderActivities();
+renderCountries();
+$("#file-name").textContent = state.fileNames.tasks;
+
+</script>
+</body>
+</html>
