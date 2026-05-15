@@ -24,25 +24,23 @@ struct FormDatePicker: View {
     }
 
     var body: some View {
-        ZStack {
-            Text(dateFormatter.string(from: selection))
-                .mtFont(16)
-                .foregroundStyle(Color.mtPrimary)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(Color.mtCard)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .allowsHitTesting(false)
-
-            if let range {
-                DatePicker("", selection: $selection, in: range, displayedComponents: .date)
-                    .labelsHidden()
-                    .opacity(0.011)
-            } else {
-                DatePicker("", selection: $selection, displayedComponents: .date)
-                    .labelsHidden()
-                    .opacity(0.011)
+        Text(dateFormatter.string(from: selection))
+            .mtFont(16)
+            .foregroundStyle(Color.mtPrimary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(Color.mtCard)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay {
+                if let range {
+                    DatePicker("", selection: $selection, in: range, displayedComponents: .date)
+                        .labelsHidden()
+                        .blendMode(.destinationOver)
+                } else {
+                    DatePicker("", selection: $selection, displayedComponents: .date)
+                        .labelsHidden()
+                        .blendMode(.destinationOver)
+                }
             }
-        }
     }
 }
