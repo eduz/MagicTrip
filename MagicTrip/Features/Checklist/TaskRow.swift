@@ -16,7 +16,7 @@ struct TaskRow: View {
                     HStack(spacing: 6) {
                         Text(task.title)
                             .mtFont(15.5, weight: task.isCompleted ? .regular : .medium)
-                            .foregroundStyle(task.isLocked ? Color.mtText3 : Color.mtText)
+                            .foregroundStyle(Color.mtText)
                             .strikethrough(task.isCompleted, color: Color.mtText3)
                             .lineLimit(2)
                         if isNew {
@@ -33,11 +33,7 @@ struct TaskRow: View {
                     HStack(spacing: 8) {
                         MTPriorityDot(priority: task.priority)
 
-                        if task.isLocked {
-                            Label(String(localized: "Aguarda data"), systemImage: "lock.fill")
-                                .mtFont(12)
-                                .foregroundStyle(Color.mtAmber)
-                        } else if let deadline = task.effectiveDeadline {
+                        if let deadline = task.effectiveDeadline {
                             deadlineBadge(deadline)
                         }
 
@@ -63,16 +59,7 @@ struct TaskRow: View {
 
     @ViewBuilder
     private var statusIcon: some View {
-        if task.isLocked {
-            ZStack {
-                Circle()
-                    .fill(Color.mtBgSecondary)
-                    .frame(width: 28, height: 28)
-                Image(systemName: "lock.fill")
-                    .mtFont(13)
-                    .foregroundStyle(Color.mtText3)
-            }
-        } else if task.taskType == .decision {
+        if task.taskType == .decision {
             ZStack {
                 Circle()
                     .strokeBorder(
@@ -110,16 +97,15 @@ struct TaskRow: View {
         }
     }
 
-    @ViewBuilder
     private func deadlineBadge(_ deadline: Date) -> some View {
-        let days = max(0, deadline.daysFromNow)
-        let isUrgent = days <= 7
-        Label(
-            days == 0 ? String(localized: "Hoje") : "\(days)d",
-            systemImage: "clock"
-        )
-        .mtFont(11.5, weight: .medium)
-        .foregroundStyle(isUrgent ? Color.mtDanger : Color.mtText3)
+        let days = deadline.daysFromNow
+        let isOverdue = days < 0
+        let label = isOverdue
+            ? "Atrasado \(-days)d"
+            : days == 0 ? String(localized: "Hoje") : "\(days)d"
+        return Label(label, systemImage: "clock")
+            .mtFont(11.5, weight: .medium)
+            .foregroundStyle(days <= 7 ? Color.mtDanger : Color.mtText3)
     }
 
     @ViewBuilder

@@ -96,19 +96,17 @@ final class ChecklistRuleEngine {
                 if !reqs.allSatisfy({ satisfied($0, responses: responses, statuses: existingStatuses) }) { return nil }
             }
 
-            // 4. Determine locked state
-            let locked = isPlanning && tmpl.requiresDate
-
-            // 5. Effective deadline
+            // 4. Effective deadline
             let deadline = effectiveDeadline(tmpl, responses: responses)
 
-            // 6. Existing status (preserved across re-evaluations)
-            let status = existingStatuses[tmpl.id] ?? (locked ? .locked : .pending)
+            // 5. Existing status (preserved across re-evaluations; migrate legacy .locked → .pending)
+            let existing = existingStatuses[tmpl.id]
+            let status = (existing == .locked || existing == nil) ? .pending : existing!
 
             return ResolvedTask(
                 template: tmpl,
                 status: status,
-                locked: locked,
+                locked: false,
                 effectiveDeadlineDays: deadline,
                 departureDate: profile.departureDate
             )

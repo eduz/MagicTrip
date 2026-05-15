@@ -19,11 +19,8 @@ final class ChecklistViewModel {
             byCat[t.category, default: []].append(t)
         }
         return TaskCategory.allCases.compactMap { cat in
+            let prio: [TaskPriority: Int] = [.critical: 0, .high: 1, .medium: 2, .low: 3]
             let list = (byCat[cat] ?? []).sorted { a, b in
-                if (a.isCompleted ? 1 : 0) != (b.isCompleted ? 1 : 0) {
-                    return (a.isCompleted ? 1 : 0) < (b.isCompleted ? 1 : 0)
-                }
-                let prio: [TaskPriority: Int] = [.critical: 0, .high: 1, .medium: 2, .low: 3]
                 return (prio[a.priority] ?? 3) < (prio[b.priority] ?? 3)
             }
             return list.isEmpty ? nil : (cat, list)
@@ -54,10 +51,11 @@ final class ChecklistViewModel {
         recalcTotalSaved(profile: profile)
     }
 
-    func setStatus(taskID: String, status: TaskStatus) {
+    func setStatus(taskID: String, status: TaskStatus, profile: TripProfile) {
         resolvedTasks = resolvedTasks.map { t in
             var mt = t; if t.id == taskID { mt.status = status }; return mt
         }
+        evaluate(profile: profile)
     }
 
     func setResponse(taskID: String, optionIDs: [String], profile: TripProfile) {

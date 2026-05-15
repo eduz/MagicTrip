@@ -89,23 +89,6 @@ struct ChecklistView: View {
                 .padding(.top, 14)
                 .padding(.bottom, 6)
 
-                // Planning banner
-                if profile.planningStatus == .undecided {
-                    HStack(spacing: 10) {
-                        Image(systemName: "lock.fill")
-                            .foregroundStyle(Color.mtAmber)
-                        Text(String(localized: "**Modo planejamento.** Defina a data da viagem para liberar todas as tarefas com prazo."))
-                            .mtFont(13.5)
-                            .foregroundStyle(Color.mtAmberText)
-                    }
-                    .padding(14)
-                    .background(Color.mtAmberBg)
-                    .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.mtAmber.opacity(0.35), lineWidth: 1))
-                    .cornerRadius(14)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 4)
-                }
-
                 // Category sections
                 ForEach(vm.groupedTasks, id: \.0) { category, tasks in
                     CategorySection(

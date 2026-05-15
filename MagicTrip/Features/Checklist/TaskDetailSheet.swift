@@ -227,12 +227,12 @@ struct TaskDetailSheet: View {
             HStack(spacing: 12) {
                 if task.isCompleted || task.isSkipped {
                     MTButton(label: String(localized: "Reabrir"), variant: .ghost) {
-                        vm.setStatus(taskID: task.id, status: .pending)
+                        vm.setStatus(taskID: task.id, status: .pending, profile: profile)
                         onClose()
                     }
                 } else {
                     MTButton(label: String(localized: "Pular"), variant: .ghost) {
-                        vm.setStatus(taskID: task.id, status: .skipped)
+                        vm.setStatus(taskID: task.id, status: .skipped, profile: profile)
                         onClose()
                     }
                     MTButton(
@@ -241,7 +241,7 @@ struct TaskDetailSheet: View {
                             : String(localized: "Marcar como feita"),
                         variant: .primary
                     ) {
-                        vm.setStatus(taskID: task.id, status: .completed)
+                        vm.setStatus(taskID: task.id, status: .completed, profile: profile)
                         onClose()
                     }
                 }

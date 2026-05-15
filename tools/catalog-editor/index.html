@@ -706,9 +706,13 @@ function cleanTriggers(t) {
 
 function cleanRequire(r) {
   const out = { task: r.task || "" };
-  if (r.answerIn && r.answerIn.length) out.answerIn = r.answerIn;
-  if (r.answerContainsAny && r.answerContainsAny.length) out.answerContainsAny = r.answerContainsAny;
-  if (r.answerContainsAll && r.answerContainsAll.length) out.answerContainsAll = r.answerContainsAll;
+  if (r.completed === true || r.completed === false) {
+    out.completed = r.completed;
+  } else {
+    if (r.answerIn && r.answerIn.length) out.answerIn = r.answerIn;
+    if (r.answerContainsAny && r.answerContainsAny.length) out.answerContainsAny = r.answerContainsAny;
+    if (r.answerContainsAll && r.answerContainsAll.length) out.answerContainsAll = r.answerContainsAll;
+  }
   return out;
 }
 
@@ -1250,38 +1254,67 @@ function requireCard(r, i, arr) {
 }
 
 function requireCardInner(r) {
-  // Allow either answerIn / answerContainsAny / answerContainsAll
   const wrap = el("div", {});
+
+  // Detect current mode: "completed" when r.completed is explicitly true/false
+  const completedVal = (r.completed === true) ? "true" : (r.completed === false) ? "false" : "";
+  const isCompletionMode = completedVal !== "";
+
+  // Row 1: task ID + mode selector
+  const modeSel = el("select", {
+    onchange: e => {
+      const v = e.target.value;
+      if (v === "true")  { r.completed = true;  delete r.answerIn; delete r.answerContainsAny; delete r.answerContainsAll; }
+      if (v === "false") { r.completed = false; delete r.answerIn; delete r.answerContainsAny; delete r.answerContainsAll; }
+      if (v === "")      { delete r.completed; }
+      renderTaskEditor();
+    },
+  });
+  [["", "por resposta"], ["true", "concluída = sim"], ["false", "concluída = não"]].forEach(([v, l]) => {
+    const opt = el("option", { value: v }, l);
+    if (v === completedVal) opt.selected = true;
+    modeSel.appendChild(opt);
+  });
+
   wrap.appendChild(el("div", { class: "row tight" },
     el("div", { class: "field", style: "flex:0 0 160px;" },
       el("label", {}, "task ID"),
       el("input", { type: "text", value: r.task || "", oninput: e => { r.task = e.target.value; } }),
     ),
-  ));
-  wrap.appendChild(el("div", { class: "row tight" },
-    el("div", { class: "field" },
-      el("label", {}, "answerIn (vírgula)"),
-      el("input", { type: "text",
-        value: (r.answerIn || []).join(","),
-        placeholder: "yes_buy,yes_already_have",
-        oninput: e => { r.answerIn = splitCsv(e.target.value); } }),
+    el("div", { class: "field", style: "flex:0 0 180px;" },
+      el("label", {}, "condição"),
+      modeSel,
     ),
   ));
-  wrap.appendChild(el("div", { class: "row tight" },
-    el("div", { class: "field" },
-      el("label", {}, "answerContainsAny (vírgula)"),
-      el("input", { type: "text",
-        value: (r.answerContainsAny || []).join(","),
-        placeholder: "disney_mk,disney_ep",
-        oninput: e => { r.answerContainsAny = splitCsv(e.target.value); } }),
-    ),
-    el("div", { class: "field" },
-      el("label", {}, "answerContainsAll (vírgula)"),
-      el("input", { type: "text",
-        value: (r.answerContainsAll || []).join(","),
-        oninput: e => { r.answerContainsAll = splitCsv(e.target.value); } }),
-    ),
-  ));
+
+  // Row 2-3: answer fields — only shown in "por resposta" mode
+  if (!isCompletionMode) {
+    wrap.appendChild(el("div", { class: "row tight" },
+      el("div", { class: "field" },
+        el("label", {}, "answerIn (vírgula)"),
+        el("input", { type: "text",
+          value: (r.answerIn || []).join(","),
+          placeholder: "yes_buy,yes_already_have",
+          oninput: e => { r.answerIn = splitCsv(e.target.value); } }),
+      ),
+    ));
+    wrap.appendChild(el("div", { class: "row tight" },
+      el("div", { class: "field" },
+        el("label", {}, "answerContainsAny (vírgula)"),
+        el("input", { type: "text",
+          value: (r.answerContainsAny || []).join(","),
+          placeholder: "disney_mk,disney_ep",
+          oninput: e => { r.answerContainsAny = splitCsv(e.target.value); } }),
+      ),
+      el("div", { class: "field" },
+        el("label", {}, "answerContainsAll (vírgula)"),
+        el("input", { type: "text",
+          value: (r.answerContainsAll || []).join(","),
+          oninput: e => { r.answerContainsAll = splitCsv(e.target.value); } }),
+      ),
+    ));
+  }
+
   return wrap;
 }
 
