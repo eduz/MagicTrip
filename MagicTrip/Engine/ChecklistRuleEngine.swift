@@ -93,7 +93,7 @@ final class ChecklistRuleEngine {
 
             // 3. Dependency filter (requires)
             if let reqs = tmpl.requires {
-                if !reqs.allSatisfy({ satisfied($0, responses: responses) }) { return nil }
+                if !reqs.allSatisfy({ satisfied($0, responses: responses, statuses: existingStatuses) }) { return nil }
             }
 
             // 4. Determine locked state
@@ -134,7 +134,11 @@ final class ChecklistRuleEngine {
 
     // MARK: - Dependency satisfaction
 
-    static func satisfied(_ dep: DependencyCondition, responses: [String: [String]]) -> Bool {
+    static func satisfied(_ dep: DependencyCondition, responses: [String: [String]], statuses: [String: TaskStatus] = [:]) -> Bool {
+        if let mustBeCompleted = dep.completed {
+            let isCompleted = statuses[dep.task] == .completed
+            return isCompleted == mustBeCompleted
+        }
         guard let ans = responses[dep.task] else { return false }
         if let needed = dep.answerIn {
             return needed.contains(where: ans.contains)
@@ -145,7 +149,7 @@ final class ChecklistRuleEngine {
         if let all = dep.answerContainsAll {
             return all.allSatisfy(ans.contains)
         }
-        return !ans.isEmpty // `answered` — any non-empty answer
+        return !ans.isEmpty
     }
 
     // MARK: - Deadline calculation

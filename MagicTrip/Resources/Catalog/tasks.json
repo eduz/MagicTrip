@@ -65,13 +65,9 @@
     ],
     "savings": [],
     "triggers": {
-      "country": "BR"
-    },
-    "requires": [
-      {
-        "task": "D-01"
-      }
-    ]
+      "country": "BR",
+      "hasPassport": false
+    }
   },
   {
     "id": "D-02",
@@ -116,7 +112,13 @@
     "triggers": {
       "country": "BR",
       "hasVisa": false
-    }
+    },
+    "requires": [
+      {
+        "task": "D-01",
+        "completed": true
+      }
+    ]
   },
   {
     "id": "D-05",

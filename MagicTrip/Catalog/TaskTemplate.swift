@@ -156,9 +156,10 @@ struct DependencyCondition: Codable {
     let answerIn: [String]?
     let answerContainsAny: [String]?
     let answerContainsAll: [String]?
+    let completed: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case task, answerIn, answerContainsAny, answerContainsAll
+        case task, answerIn, answerContainsAny, answerContainsAll, completed
     }
 }
 
