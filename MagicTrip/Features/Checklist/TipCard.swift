@@ -9,7 +9,7 @@ struct TipCard: View {
                 .mtFont(15)
                 .foregroundStyle(Color.mtPrimary)
                 .padding(.top, 2)
-            Text(tip)
+            Text((try? AttributedString(markdown: tip)) ?? AttributedString(tip))
                 .mtFont(15.5)
                 .foregroundStyle(Color.mtText2)
                 .lineSpacing(3)
@@ -48,16 +48,10 @@ struct SavingsTipCard: View {
                         .foregroundStyle(Color.mtText)
                         .lineSpacing(3)
                         .fixedSize(horizontal: false, vertical: true)
-                    HStack(spacing: 8) {
-                        if tip.savingsScope == .perPerson {
-                            Label(String(localized: "por pessoa"), systemImage: "person.fill")
-                                .mtFont(13)
-                                .foregroundStyle(Color.mtText3)
-                        } else {
-                            Label(String(localized: "compartilhado"), systemImage: "person.2.fill")
-                                .mtFont(13)
-                                .foregroundStyle(Color.mtText3)
-                        }
+                    HStack(spacing: 6) {
+                        Text(String(localized: "Economize em média"))
+                            .mtFont(13)
+                            .foregroundStyle(Color.mtText3)
                         Text(totalSaved.formatUSD())
                             .mtFont(13.5, weight: .semibold).monospacedDigit()
                             .foregroundStyle(Color.mtViolet)

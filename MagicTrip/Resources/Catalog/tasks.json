@@ -12,22 +12,27 @@
       {
         "id": "t-pl1-1",
         "title": "Evite Spring Break americano",
-        "description": "Meados de março tem pico de lotação — se busca tranquilidade, evite."
+        "description": "Em meados de março há pico de lotação por causa do Spring Break americano — se busca tranquilidade, evite."
       },
       {
         "id": "t-pl1-2",
         "title": "Feriados escolares do Brasil inflacionam passagem",
-        "description": "Julho e dezembro têm tarifas aéreas 40–60% maiores."
+        "description": "**Feriados escolares do Brasil inflacionam passagem.** Julho e dezembro têm tarifas aéreas 40–60% maiores."
       },
       {
         "id": "t-pl1-3",
         "title": "Eventos especiais mudam a experiência",
-        "description": "Halloween Horror Nights (set–nov), Epcot Food & Wine Festival (ago-nov), Mickey's Very Merry Christmas (nov-dez) são eventos diferenciados que acontecem somente em algumas épocas do ano."
+        "description": "**Eventos especiais mudam a experiência.** Halloween Horror Nights (set–nov), Epcot Food & Wine Festival (ago-nov), Mickey's Very Merry Christmas (nov-dez) são eventos diferenciados que acontecem somente em algumas épocas do ano."
       },
       {
         "id": "t-jh92ey",
         "title": "Evite época de furacões",
-        "description": "Entre setembro e início de novembro a probabilidade de chuvas fortes e furacões na Florida é maior."
+        "description": "**Evite época de furacões.** Entre setembro e início de novembro a probabilidade de chuvas fortes e furacões na Florida é maior."
+      },
+      {
+        "id": "t-38d2fc",
+        "title": "Cuidado com corridas runDisney",
+        "description": "**Cuidado com corridas runDisney.** Corridas runDisney (Springtime Surprise em abril, Wine & Dine em novembro) lotam resorts e bloqueiam reservas. Confira o calendário em rundisney.com antes de fechar datas."
       }
     ],
     "savings": [
@@ -38,29 +43,39 @@
         "usd": 120
       }
     ],
-    "triggers": {
-      "planning": "undecided"
-    }
+    "triggers": {}
   },
   {
     "id": "D-01",
     "title": "Emitir ou renovar passaporte",
     "category": "documentation",
     "priority": "critical",
-    "deadlineDays": 60,
+    "deadlineDays": 150,
     "requiresDate": false,
     "scope": "BR",
     "description": "Solicitar via Polícia Federal. Validade mínima recomendada: 6 meses após a data prevista de volta.",
+    "moreInfoUrl": "https://www.gov.br/pt-br/servicos/obter-passaporte-comum-para-brasileiro",
+    "moreInfoLabel": "Site do Governo Federal",
     "tips": [
       {
         "id": "t-d1-1",
         "title": "Agende com folga",
-        "description": "Disponibilidade varia muito entre cidades — reserve horário com antecedência."
+        "description": "Agende com folga - Disponibilidade varia muito entre cidades — reserve horário com antecedência."
       },
       {
         "id": "t-d1-2",
-        "title": "Use cabine fotográfica certificada",
-        "description": "Nos casos em que é preciso levar as fotos, isso evita reprovação da foto na emissão. A maioria dos postos da PF já tiram as fotos."
+        "title": "Leve documento atualizado",
+        "description": "Leve documento atualizado - O RG deve estar em bom estado e, preferencialmente, ter sido emitido há menos de 10 anos. Se mudou de nome (casamento/divórcio), leve a certidão atualizada."
+      },
+      {
+        "id": "t-yk0ikz",
+        "title": "Regularidade de documentos",
+        "description": "**Regularidade de documentos.** Homens maiores de 18 anos precisam estar em dia com o serviço militar. Verifique se sua situação eleitoral está regular (votos da última eleição)."
+      },
+      {
+        "id": "t-d1-renew",
+        "title": "Renovação: leve o passaporte vencido",
+        "description": "Se for renovação, leve o passaporte anterior (mesmo vencido) no dia do atendimento na Polícia Federal. Ele é necessário para o processo e para preservar vistos válidos que possam estar nele (como o americano de 10 anos)."
       }
     ],
     "savings": [],
@@ -74,7 +89,7 @@
     "title": "Solicitar visto B1/B2",
     "category": "documentation",
     "priority": "critical",
-    "deadlineDays": 90,
+    "deadlineDays": 120,
     "requiresDate": true,
     "scope": "BR",
     "description": "Visto americano de turismo. Inclui entrevista presencial no consulado e taxa de US$ 185.",
@@ -84,17 +99,17 @@
       {
         "id": "t-d2-1",
         "title": "Filas longas de entrevista",
-        "description": "Pode levar 60–120 dias dependendo do consulado. Agende assim que decidir viajar."
+        "description": "**Filas longas de entrevista.** Pode levar 60–120 dias dependendo do consulado. Agende assim que decidir viajar."
       },
       {
         "id": "t-d2-2",
         "title": "Tenha vínculos documentados",
-        "description": "Emprego formal, imóvel no seu nome no Brasil fortalecem o pedido de visto."
+        "description": "Tenha vínculos documentados - Emprego formal, imóvel no seu nome no Brasil fortalecem o pedido de visto."
       },
       {
         "id": "t-d2-3",
         "title": "Crianças até 14 anos dispensam entrevista",
-        "description": "Menores de 14 anos podem solicitar sem precisar comparecer ao consulado para entrevista.",
+        "description": "**Crianças até 14 anos dispensam entrevista.** Menores de 14 anos podem solicitar sem precisar comparecer ao consulado para entrevista.",
         "applicableConditions": {
           "hasKidUnder10": true
         }
@@ -128,12 +143,12 @@
     "deadlineDays": 7,
     "requiresDate": false,
     "scope": "GLOBAL",
-    "description": "Manter cópias em nuvem dos passaportes, vistos, seguro e cartões facilita em caso de perda.",
+    "description": "Mantenha cópias em nuvem (Drive, iCloud, Notes criptografado) dos passaportes, vistos, seguro e cartões. Em caso de perda, agiliza substituição e reembolsos.",
     "tips": [
       {
         "id": "t-d5-1",
         "title": "Guarde em nuvem criptografada",
-        "description": "App de notas com criptografia é mais seguro do que só o rolo da câmera."
+        "description": "Guarde em nuvem criptografada - App de notas com criptografia é mais seguro do que só o rolo da câmera."
       }
     ],
     "savings": [],
@@ -144,34 +159,37 @@
     "title": "Comprar dólares com estratégia de câmbio",
     "category": "finance",
     "priority": "high",
-    "deadlineDays": 30,
+    "deadlineDays": 60,
     "requiresDate": true,
     "scope": "BR",
-    "description": "Distribuir a compra de USD em 3–5 momentos para suavizar o efeito da volatilidade cambial.",
+    "description": "Distribuir a compra de dólares em 3–5 momentos para suavizar o efeito da volatilidade cambial. Sempre que tiver uma queda significativa na cotação compre um pouco, assim você terá uma média boa.",
     "tips": [
       {
         "id": "t-f1-1",
-        "title": "Casas de câmbio têm spread menor que bancos",
-        "description": "Compare pelo menos 3 casas antes de fechar."
-      },
-      {
-        "id": "t-f1-2",
-        "title": "Fintechs de remessa como opção parcial",
-        "description": "Wise e Nomad podem cobrir parte do valor com taxa menor."
+        "title": "Abra conta em uma fintech como Inter Global, Revolut, Wise ou Nomad",
+        "description": "Abra conta em uma fintech como Inter Global, Revolut, Wise ou Nomad, elas praticam taxas menores que casas de câmbio tradicionais, além de ter praticidade de converter R$ para US$ a qualquer momento. Possuem carteiras virtuais (Apple Pay e Google Pay) para pagamento com aproximação."
       }
     ],
     "savings": [
       {
         "id": "s-f1-1",
         "title": "Cotar 3+ casas de câmbio",
-        "description": "Diferença de spread pode chegar a 2% sobre o total.",
+        "description": "Cotar em 3 ou mais casas de câmbio, a diferença de spread pode chegar a 2% sobre o total.",
         "usd": 70
       },
       {
         "id": "s-f1-2",
         "title": "Dividir a compra em 3–5 datas",
-        "description": "Suaviza picos do dólar e melhora o preço médio.",
+        "description": "Dividir a compra em 3–5 datas suaviza picos do dólar e melhora o preço médio.",
         "usd": 45
+      },
+      {
+        "id": "s-wk2vhn",
+        "title": "Utilizar Gift Cards da conta global do Banco Inter",
+        "description": "Utilizar Gift Cards da conta global do Banco Inter, com ela é possível economizar bastante comprando gift cards de várias lojas de outlets (Adidas, Nike, Puma, etc), restaurantes (Cheesecake Factory, Bubba Gump, etc) e da própria Disney (vale por todo complexo Disney) com até 15% de cashback direto na conta.",
+        "usd": 50,
+        "moreInfoUrl": "https://inter.co/pra-voce/global-account/",
+        "moreInfoLabel": "Site da conta global do Banco Inter"
       }
     ],
     "triggers": {
@@ -186,24 +204,30 @@
     "deadlineDays": 14,
     "requiresDate": true,
     "scope": "GLOBAL",
-    "description": "Cobertura médica nos EUA é essencial — um atendimento simples pode custar milhares de dólares. Mínimo recomendado: USD 60k.",
+    "description": "Cobertura médica nos EUA é essencial — um atendimento simples pode custar milhares de dólares. Mínimo recomendado: $60,000.00.",
     "tips": [
       {
         "id": "t-f3-1",
         "title": "Compare pelo menos 3 seguradoras",
-        "description": "Valores e cobertura variam bastante entre operadoras."
+        "description": "Compare pelo menos 3 seguradoras - Valores e cobertura variam bastante entre operadoras."
       },
       {
         "id": "t-f3-2",
         "title": "Verifique limites de bagagem e cancelamento",
-        "description": "Cobertura de cancelamento pode ser decisiva se os planos mudarem."
+        "description": "Verifique limites de bagagem e cancelamento - Cobertura de cancelamento pode ser decisiva se os planos mudarem."
       }
     ],
     "savings": [
       {
         "id": "s-f3-1",
-        "title": "Usar cupom de site de cashback",
-        "description": "5–10% de desconto na contratação.",
+        "title": "Usar cupom de site de cashback como Meliuz",
+        "description": "Usar cupom de site de cashback - pode dar retorno de 5–10% de desconto na contratação.",
+        "usd": 25
+      },
+      {
+        "id": "s-zigs6s",
+        "title": "Realizar compra perto de datas comemorativas",
+        "description": "Realizar a compra perto de datas comemorativas como Black Friday ou Semana do Consumidor costumam ter bons descontos. O valor do seguro saúde não costuma variar muito durante o ano então pode compensar aguardar uma data como esta para fechar o pedido.",
         "usd": 25
       }
     ],
@@ -222,12 +246,12 @@
       {
         "id": "t-f3a-1",
         "title": "Mínimo recomendado USD 100k para 65+",
-        "description": "Internação nos EUA pode ultrapassar USD 5.000 por dia."
+        "description": "Mínimo recomendado USD 100k para 65+ - Internação nos EUA pode ultrapassar USD 5.000 por dia."
       },
       {
         "id": "t-f3a-2",
         "title": "Verifique cobertura de condições pré-existentes",
-        "description": "Frequentemente excluída no plano básico — leia a apólice."
+        "description": "Verifique cobertura de condições pré-existentes - Frequentemente excluída no plano básico — leia a apólice."
       }
     ],
     "savings": [],
@@ -247,33 +271,66 @@
     "tips": [
       {
         "id": "t-f4-1",
-        "title": "Reserve 15% de buffer para imprevistos",
-        "description": "Orlando é famosa por gastos inesperados — lembranças, gorjetas, upgrades."
+        "title": "Reserve 15% de buffer para tips",
+        "description": "**Reserve 15% de buffer para tips.** Reserve sempre pelo menos 15% do valor das refeições para as gorjetas (Tips)."
+      },
+      {
+        "id": "t-pejj2e",
+        "title": "Refeições e lanches nos parques ",
+        "description": "Refeições e lanches nos parques costumam ter um valor acima da média, leve frutas e lanches na mochila para amenizar o custo. Somente o parque do SeaWorld não permite entrada com comida na mochila."
+      },
+      {
+        "id": "t-tywso6",
+        "title": "Programe o valor de refeições",
+        "description": "**Programe o valor de refeições.** Faça uma lista dos restaurantes e lanchonetes que deseja visitar e veja os cardápios antecipadamente para programar o que vai pedir, a maioria oferece menu online."
+      },
+      {
+        "id": "t-jregzs",
+        "title": "Evite filas para pedir comida nos parques",
+        "description": "A maioria das lanchonetes e restaurantes dos parques permite que você faça o pedido antecipadamente pelo aplicativo, já faça o pedido assim que sair do último brinquedo antes de ir para o restaurante e evite filas."
       }
     ],
-    "savings": [],
+    "savings": [
+      {
+        "id": "s-jivece",
+        "title": "Café da manhã",
+        "description": "Se não for se hospedar em hotel que ofereça café da manhã incluso na diária, faça compras no Walmart e economize.",
+        "usd": 20
+      },
+      {
+        "id": "s-ebmbx5",
+        "title": "Avalie o kids menu",
+        "description": "Os itens de menu kids dos restaurantes dos parques são bem fartos e geralmente são mais em conta, você pode pedir mesmo não tendo crianças no grupo.",
+        "usd": 10
+      }
+    ],
     "triggers": {}
   },
   {
     "id": "H-01",
     "title": "Decidir tipo de hospedagem",
     "category": "lodging",
-    "taskType": "decision",
+    "taskType": "multi_select_grouped",
     "priority": "high",
     "deadlineDays": 60,
     "requiresDate": false,
     "scope": "GLOBAL",
-    "description": "Onde você fica influencia preço, transporte, Early Entry e — importante — o prazo de reserva do Lightning Lane Disney (7d on-site vs. 3d off-site).",
+    "description": "Onde você fica influencia preço, transporte e benefícios. Você pode combinar tipos diferentes ao longo da viagem — ex.: alguns dias em hotel oficial Disney, outros em Universal e outros em hotel fora dos parques. Marque todos que pretende usar.",
     "tips": [
+      {
+        "id": "t-h1-disney",
+        "title": "Vantagens de ficar em hotel oficial Disney",
+        "description": "**Vantagens de ficar em hotel oficial Disney.** Early Entry de 30 min em todos os parques Disney; janela de Lightning Lane Multi Pass com 7 dias de antecedência (vs. 3 dias para hóspedes fora dos parques); transporte gratuito entre hotéis e parques (ônibus, monorail, Skyliner ou barco); Extended Evening Hours em parques selecionados para hóspedes Deluxe; entrega de compras direto no quarto e tema imersivo que faz parte da experiência."
+      },
       {
         "id": "t-h1-1",
         "title": "Off-property pode ser 40–60% mais barato",
-        "description": "International Drive tem ótimas opções de custo-benefício."
+        "description": "**Hotéis fora dos parques podem ser 40–60% mais baratos.** A região da International Drive tem ótimas opções de custo-benefício, com bons traslados e perto da Universal e dos outlets."
       },
       {
         "id": "t-h1-2",
         "title": "Com idosos, on-property pode valer a diferença",
-        "description": "Transporte sem caminhada longa até o parque é decisivo para grupos com mobilidade reduzida.",
+        "description": "**Com idosos, hotel oficial pode valer a diferença.** Hospedar dentro do complexo Disney ou Universal elimina caminhada longa do estacionamento até a portaria — decisivo para grupos com mobilidade reduzida.",
         "applicableConditions": {
           "hasSeniors": true
         }
@@ -281,38 +338,38 @@
       {
         "id": "t-h1-3",
         "title": "Hotéis Universal premium incluem Express Pass",
-        "description": "Eliminação de filas inclusa para a maioria das atrações."
+        "description": "**Hotéis Universal premium incluem Express Pass.** Royal Pacific, Hard Rock e Portofino dão fila prioritária na maioria das atrações da Universal sem custo adicional — pode compensar o valor mais alto da diária."
       }
     ],
     "savings": [
       {
         "id": "s-h1-1",
-        "title": "Off-property com transporte próprio",
-        "description": "Pode economizar US$ 80–150 por noite vs. resort on-site.",
+        "title": "Hospedar fora dos parques",
+        "description": "Se hospedando em hotéis ou Airbnb fora dos parques (com transporte próprio), é possível economizar US$ 80–150 por noite em comparação a hotéis oficiais Disney ou Universal.",
         "usd": 320
       }
     ],
     "triggers": {},
-    "decision": {
-      "question": "Onde você pretende se hospedar?",
-      "options": [
-        {
-          "id": "disney_onsite",
-          "label": "On-site Disney",
-          "subtitle": "Hotel oficial Disney · Early Entry · transporte interno"
-        },
-        {
-          "id": "universal_onsite",
-          "label": "On-site Universal",
-          "subtitle": "Hotel Universal premium pode incluir Express Pass grátis"
-        },
-        {
-          "id": "off_property",
-          "label": "Off-property",
-          "subtitle": "Hotel/Airbnb fora dos resorts — economiza mas precisa de transporte"
-        }
-      ]
-    }
+    "groups": [
+      {
+        "id": "lodging",
+        "label": "Tipos de hospedagem",
+        "options": [
+          {
+            "id": "disney_onsite",
+            "label": "Hotel oficial Disney (dentro do complexo)"
+          },
+          {
+            "id": "universal_onsite",
+            "label": "Hotel oficial Universal (dentro do complexo)"
+          },
+          {
+            "id": "off_property",
+            "label": "Hotel ou Airbnb fora dos parques"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "H-02",
@@ -322,15 +379,59 @@
     "deadlineDays": 45,
     "requiresDate": true,
     "scope": "GLOBAL",
-    "description": "Travar reserva com política flexível enquanto monitora preços.",
+    "description": "Reserve com política de cancelamento flexível para travar o preço e continuar monitorando promoções até a viagem. Hotéis oficiais Disney têm desconto para hóspedes brasileiros em algumas épocas (Welcome Florida, Visit Orlando); hotéis Universal costumam ter promoções Bounce Back para retorno. Para Airbnb, considere taxas de limpeza e cauções.",
     "tips": [
       {
         "id": "t-h2-1",
         "title": "Booking e Expedia geralmente permitem cancelamento até 24h",
-        "description": "Reserve cedo com cancel gratuito e monitore promoções."
+        "description": "**Reserve com cancelamento flexível.** Booking, Expedia e o próprio site Disney permitem cancelamento gratuito até 24h–7d antes da viagem. Reserve cedo, monitore promoções e troque a reserva se o preço cair."
+      },
+      {
+        "id": "t-h2-2",
+        "title": "Programas de fidelidade dão noites grátis",
+        "description": "**Programas de fidelidade dão noites grátis.** Marriott Bonvoy, Hilton Honors e IHG One Rewards têm muitos hotéis em Orlando. Use pontos acumulados pelo cartão de crédito ou compre pontos em promo (sai mais barato que diária)."
+      },
+      {
+        "id": "t-h2-3",
+        "title": "Disney solta promos sazonais",
+        "description": "**Disney solta promos sazonais.** Free Dining (em algumas épocas), 25–30% off em Deluxe Resorts e pacotes Bounce Back na recepção do hotel. Cadastre-se na newsletter Disney Brasil e do Visit Orlando para receber as ofertas em primeira mão."
+      },
+      {
+        "id": "t-h2-4",
+        "title": "Compare via agências brasileiras",
+        "description": "**Compare via agências brasileiras.** Operadoras como Maringá Turismo, FlyTour e CVC têm tarifas negociadas em Orlando que às vezes ficam abaixo das de Booking ou Expedia, especialmente em pacotes hotel + ingressos."
+      },
+      {
+        "id": "t-h2-5",
+        "title": "Cuidado com taxas escondidas",
+        "description": "**Cuidado com taxas escondidas.** Resort fee (US$ 25–45/noite), parking fee (US$ 25–35/noite em hotéis Disney/Universal) e taxas de Airbnb (limpeza, serviço, caução) podem adicionar 20–30% ao valor anunciado. Calcule sempre o preço total antes de comparar."
+      },
+      {
+        "id": "t-h2-6",
+        "title": "Quartos com kitchenette economizam refeições",
+        "description": "**Quartos com kitchenette economizam refeições.** Hotéis como Disney's Saratoga Springs, hotéis Vista Cay e a maioria dos Airbnb têm cozinha. Preparar café da manhã e jantares simples no quarto economiza US$ 40–80/dia para uma família."
       }
     ],
-    "savings": [],
+    "savings": [
+      {
+        "id": "s-h2-1",
+        "title": "Reservar com política flexível e monitorar",
+        "description": "Travar a reserva cedo com cancelamento gratuito e refazer se o preço cair pode economizar US$ 100–300 no total da hospedagem.",
+        "usd": 200
+      },
+      {
+        "id": "s-h2-2",
+        "title": "Pacote hotel + ingressos vs. comprar separado",
+        "description": "Pacotes Disney 'Magic Your Way' ou ofertas Universal podem sair 10–15% mais baratos que comprar hotel e ingressos separadamente — vale cotar nas duas formas.",
+        "usd": 180
+      },
+      {
+        "id": "s-h2-3",
+        "title": "Resgate de pontos do cartão",
+        "description": "Pontos Smiles, Latam Pass, Livelo, Esfera ou Itaú podem ser usados em programas como Marriott Bonvoy e Hilton via transferência bonificada — diária grátis em hotel premium Orlando custa cerca de 30–50 mil pontos.",
+        "usd": 250
+      }
+    ],
     "triggers": {},
     "requires": [
       {
@@ -356,7 +457,7 @@
       {
         "id": "t-hacc-1",
         "title": "Disney Skyliner conecta hotéis sem caminhada",
-        "description": "EPCOT e Hollywood Studios acessíveis via bondinho de altura."
+        "description": "**Disney Skyliner conecta hotéis sem caminhada.** EPCOT e Hollywood Studios acessíveis via bondinho de altura."
       }
     ],
     "savings": [],
@@ -372,20 +473,58 @@
     "deadlineDays": 90,
     "requiresDate": true,
     "scope": "GLOBAL",
-    "description": "Idealmente comprar 3–6 meses antes para tarifas competitivas.",
+    "description": "Idealmente comprar 3–6 meses antes para tarifas competitivas. Trechos GRU/GIG→MCO costumam variar 30–60% conforme antecedência, dia da semana e companhia. Vale comparar voo direto vs. conexão e considerar aeroportos alternativos da Flórida.",
     "tips": [
       {
         "id": "t-t1-1",
         "title": "Alertas de preço em Google Flights e Kayak",
-        "description": "Configure alertas para o trecho e receba notificações de queda de preço."
+        "description": "**Alertas de preço em Google Flights e Kayak.** Configure alertas para o trecho específico e receba notificações de queda. Adicione também datas flexíveis (±3 dias) — o sistema mostra a tabela de preços do mês inteiro."
+      },
+      {
+        "id": "t-t1-2",
+        "title": "Considere aeroportos alternativos",
+        "description": "**Considere aeroportos alternativos.** Tampa (TPA) e Fort Lauderdale (FLL) ficam a 1h30–3h de Orlando e às vezes saem US$ 100–200 mais baratos. Some o custo do aluguel de carro extra e veja se compensa."
+      },
+      {
+        "id": "t-t1-3",
+        "title": "Conexão por Panamá ou Bogotá pode reduzir tarifa",
+        "description": "**Conexão por Panamá ou Bogotá pode reduzir tarifa.** Copa Airlines (via PTY) e Avianca (via BOG) frequentemente operam GRU→MCO por menos que voos diretos da Latam ou American. Vale 2–4h extras de viagem para economizar centenas de dólares."
+      },
+      {
+        "id": "t-t1-4",
+        "title": "Use milhas para baixar o custo final",
+        "description": "**Use milhas para baixar o custo final.** Smiles, Latam Pass, Tudo Azul e Livelo permitem resgate parcial em dinheiro + milhas. Mesmo sem stock alto de milhas, o resgate parcial pode tirar 20–40% do valor da passagem."
+      },
+      {
+        "id": "t-t1-5",
+        "title": "Black Friday e Cyber Monday têm promos específicas",
+        "description": "**Black Friday e Cyber Monday têm promos específicas.** Latam, Gol e Azul soltam ofertas de internacional na última semana de novembro. Se sua viagem é entre fevereiro e junho do ano seguinte, vale esperar para fechar nesse período."
       }
     ],
     "savings": [
       {
         "id": "s-t1-1",
         "title": "Voar em dia útil (ter/qua)",
-        "description": "Diferença de até US$ 120 por bilhete vs. fins de semana.",
+        "description": "Voos saindo de terça ou quarta podem ser US$ 80–120 mais baratos que sextas e domingos. Volta na terça também tende a economizar.",
         "usd": 240
+      },
+      {
+        "id": "s-t1-2",
+        "title": "Compre com 90+ dias de antecedência",
+        "description": "Comprar com 90–180 dias de antecedência costuma sair US$ 200–400 mais barato que decisões de última hora (30 dias ou menos).",
+        "usd": 300
+      },
+      {
+        "id": "s-t1-3",
+        "title": "Conexão em PTY/BOG vs. voo direto",
+        "description": "Optar por conexão via Panamá (Copa) ou Bogotá (Avianca) em vez de voo direto GRU→MCO pode economizar US$ 200–500 por bilhete.",
+        "usd": 350
+      },
+      {
+        "id": "s-t1-4",
+        "title": "Evite férias escolares brasileiras",
+        "description": "Janeiro e julho têm sobretaxa de 40–60% em passagens internacionais por causa das férias escolares. Maio, setembro e novembro são meses mais baratos.",
+        "usd": 250
       }
     ],
     "triggers": {}
@@ -403,7 +542,7 @@
       {
         "id": "t-t2-1",
         "title": "SUV intermediário para 4+ pessoas com malas",
-        "description": "Economiza vs. van e conforto muito superior."
+        "description": "**SUV intermediário para 4+ pessoas com malas.** Economiza vs. van e conforto muito superior."
       }
     ],
     "savings": [
@@ -434,7 +573,7 @@
       {
         "id": "t-p01-1",
         "title": "Máximo 1 parque por dia com idosos ou crianças pequenas",
-        "description": "Ritmo de 1 parque por dia é mais sustentável para grupos vulneráveis.",
+        "description": "**Máximo 1 parque por dia com idosos ou crianças pequenas.** Ritmo de 1 parque por dia é mais sustentável para grupos vulneráveis.",
         "applicableConditions": {
           "hasSeniors": true
         }
@@ -528,7 +667,7 @@
     "category": "parks",
     "taskType": "decision",
     "priority": "high",
-    "deadlineDays": 30,
+    "deadlineDays": 75,
     "requiresDate": false,
     "scope": "GLOBAL",
     "description": "Ingressos da Disney são caros e cada parque exige passe próprio. Decidir agora destrava reservas de restaurante e Lightning Lane.",
@@ -536,20 +675,53 @@
       {
         "id": "t-p2-1",
         "title": "Multi-day passes diluem o custo por dia",
-        "description": "Quanto mais dias, menor o custo por dia."
+        "description": "**Multi-day passes diluem o custo por dia.** A partir do 4º dia, o custo por dia cai cerca de 50%. Multi-day faz mais sentido para 4+ dias na Disney."
       },
       {
         "id": "t-p2-2",
-        "title": "Park Hopper só vale se vai alternar parques no mesmo dia",
-        "description": "Para grupos com crianças e idosos, 1 parque por dia é o recomendado."
+        "title": "Park Hopper raramente compensa para famílias",
+        "description": "**Park Hopper raramente compensa para famílias.** Custa US$ 80–95 adicionais por ingresso. Só vale se você vai mudar de parque depois das 14h e os parques são próximos (Epcot ↔ Magic Kingdom via Skyliner+Monorail). Para grupos com crianças ou idosos, 1 parque por dia rende mais."
+      },
+      {
+        "id": "t-p2-azul",
+        "title": "Azul Viagens dá 10% off com cartão Azul",
+        "description": "**Azul Viagens dá 10% off com cartão Azul.** Pagando ingressos Disney no site da Azul Viagens com cartão de crédito Azul Itaucard (qualquer categoria), o desconto é aplicado direto na compra. Combina com parcelamento sem juros em algumas datas."
+      },
+      {
+        "id": "t-p2-broker",
+        "title": "Revendedores autorizados (Undercover Tourist, etc.)",
+        "description": "**Revendedores autorizados são oficiais e mais baratos.** Sites como Undercover Tourist, Get Away Today e Maple Leaf Tickets vendem ingressos Disney oficiais com 5–15% off do preço de balcão. Ativação igual ao do site Disney via Magic Band."
+      },
+      {
+        "id": "t-p2-avoid1day",
+        "title": "Evite ingresso de 1 dia",
+        "description": "**Evite ingresso de 1 dia avulso.** É o formato mais caro por dia (US$ 130–199 dependendo da época). Se quer só 1 dia, considere comprar 2 dias e usar só 1 — pode sair mais barato porque o segundo dia adicionado custa pouco."
       }
     ],
     "savings": [
       {
-        "id": "s-p2-1",
-        "title": "Combo multi-day em vez de ingressos avulsos",
-        "description": "Pode economizar US$ 30–50 por pessoa.",
+        "id": "s-p2-multiday",
+        "title": "Multi-day em vez de ingressos avulsos",
+        "description": "Comprar passe de 4–5 dias em vez de ingressos diários reduz drasticamente o custo por dia. A diferença entre 1 dia (US$ 159) e 4 dias (US$ 478) é só US$ 80/dia no 4º dia — quase metade do preço diário.",
         "usd": 140
+      },
+      {
+        "id": "s-p2-azul",
+        "title": "10% off no Azul Viagens com cartão Azul Itaucard",
+        "description": "Comprar ingressos Disney pelo site da Azul Viagens com cartão de crédito Azul Itaucard dá 10% de desconto direto. Em compra de US$ 500/pessoa, são US$ 50 de economia por pessoa.",
+        "usd": 50
+      },
+      {
+        "id": "s-p2-broker",
+        "title": "Revendedores autorizados (Undercover Tourist, etc.)",
+        "description": "Sites como Undercover Tourist, Get Away Today e Maple Leaf vendem ingressos Disney oficiais com 5–15% off do preço Disney direto. Em ingresso multi-day, são US$ 30–60 de economia por pessoa.",
+        "usd": 45
+      },
+      {
+        "id": "s-p2-noparkhopper",
+        "title": "Não comprar Park Hopper",
+        "description": "Park Hopper custa US$ 80–95 adicionais por ingresso. Para grupos com crianças, idosos ou ritmo mais tranquilo, faz pouco sentido — economia direta no orçamento.",
+        "usd": 85
       }
     ],
     "triggers": {},
@@ -599,13 +771,13 @@
     "tips": [
       {
         "id": "t-p3-1",
-        "title": "LMP: pré-reserva 3 atrações + adiciona no dia",
-        "description": "Melhor custo-benefício para quem vai em múltiplos parques."
+        "title": "Lightning Lane Multi Pass (LMP)",
+        "description": "Lightning Lane Multi Pass (LMP): pré-reserva até 3 atrações antes da visita (7 dias antes para hóspedes Disney, 3 dias para off-site). Melhor custo-benefício para múltiplos parques."
       },
       {
         "id": "t-p3-2",
-        "title": "SPP para as atrações mais concorridas",
-        "description": "Tron, Guardians of the Galaxy — as filas chegam a 120min."
+        "title": "Lightning Lane Single Pass (SPP)",
+        "description": "Lightning Lane Single Pass (SPP): para as atrações mais concorridas (Tron, Guardians of the Galaxy) — filas costumam passar de 120 min."
       }
     ],
     "savings": [],
@@ -653,7 +825,7 @@
       {
         "id": "t-p3a-1",
         "title": "Disponível no My Disney Experience às 7h ET",
-        "description": "As mais concorridas esgotam em minutos — tenha plano A e B."
+        "description": "**Disponível no My Disney Experience às 7h ET.** As mais concorridas esgotam em minutos — tenha plano A e B."
       }
     ],
     "savings": [],
@@ -698,15 +870,15 @@
     "category": "parks",
     "taskType": "decision",
     "priority": "medium",
-    "deadlineDays": 30,
+    "deadlineDays": 75,
     "requiresDate": false,
     "scope": "GLOBAL",
-    "description": "Universal opera Studios, Islands of Adventure, Volcano Bay e o novo Epic Universe. Cada parque tem entrada própria.",
+    "description": "Universal opera Studios, Islands of Adventure, Volcano Bay e Epic Universe (aberto em 2025). Bilhete Park-to-Park é recomendado para alternar entre os parques.",
     "tips": [
       {
         "id": "t-p4-1",
         "title": "Hospedados em hotel Universal premium têm Express Pass incluso",
-        "description": "Para a maioria das atrações — vale comparar custo do hotel + Express Pass vs. comprar separado."
+        "description": "**Hospedados em hotel Universal premium têm Express Pass incluso.** Para a maioria das atrações — vale comparar custo do hotel + Express Pass vs. comprar separado."
       }
     ],
     "savings": [],
@@ -756,12 +928,12 @@
       {
         "id": "t-p5a-1",
         "title": "Tenha 2–3 opções de horário e restaurante por dia",
-        "description": "A competição é alta — flexibilidade aumenta a chance de garantir reserva."
+        "description": "**Tenha 2–3 opções de horário e restaurante por dia.** A competição é alta — flexibilidade aumenta a chance de garantir reserva."
       },
       {
         "id": "t-p5a-2",
         "title": "Disponível no My Disney Experience",
-        "description": "Crie conta e pré-carregue os ingressos antes da janela abrir."
+        "description": "**Disponível no My Disney Experience.** Crie conta e pré-carregue os ingressos antes da janela abrir."
       }
     ],
     "savings": [],
@@ -789,7 +961,7 @@
       {
         "id": "t-p5b-1",
         "title": "App Universal Orlando Resort",
-        "description": "Reservas e Express Pass disponíveis no app oficial."
+        "description": "**App Universal Orlando Resort.** Reservas e Express Pass disponíveis no app oficial."
       }
     ],
     "savings": [],
@@ -812,12 +984,17 @@
     "deadlineDays": 21,
     "requiresDate": false,
     "scope": "GLOBAL",
-    "description": "Distâncias dentro dos parques (8–15 km/dia) tornam carrinho essencial para crianças pequenas.",
+    "description": "Distâncias dentro dos parques (10–15 km/dia) cansam crianças pequenas. Carrinho dobrável é essencial para crianças até ~5 anos.",
     "tips": [
       {
         "id": "t-l1-1",
         "title": "Locadoras externas entregam direto no hotel",
-        "description": "Muito mais prático e econômico do que alugar dentro do parque."
+        "description": "**Locadoras externas entregam direto no hotel.** Muito mais prático e econômico do que alugar dentro do parque."
+      },
+      {
+        "id": "t-b86799",
+        "title": "Aluguel por empresas locais",
+        "description": "Empresas locais especializadas em turistas — como CDO (Cabaninha de Orlando), Magic Strollers, Orlando Stroller Rentals e Kingdom Strollers — entregam o carrinho no seu hotel e custam menos que o aluguel interno do parque, com modelos melhores e sem fila."
       }
     ],
     "savings": [
@@ -845,7 +1022,7 @@
       {
         "id": "t-l3-1",
         "title": "Apps oficiais listam por atração",
-        "description": "My Disney Experience e Universal Orlando App têm a lista completa com alturas mínimas."
+        "description": "**Apps oficiais listam por atração.** My Disney Experience e Universal Orlando App têm a lista completa com alturas mínimas."
       }
     ],
     "savings": [],
@@ -861,24 +1038,29 @@
     "deadlineDays": 21,
     "requiresDate": false,
     "scope": "GLOBAL",
-    "description": "Parques chegam a exigir 8–15 km por dia. ECV (scooter elétrica) ou cadeira de rodas mudam completamente a experiência para idosos e mobilidade reduzida.",
+    "description": "Parques exigem caminhadas de 10–15 km/dia. ECV (scooter elétrica) ou cadeira de rodas mudam completamente a experiência para idosos e pessoas com mobilidade reduzida.",
     "moreInfoUrl": "https://disneyworld.disney.go.com/guest-services/disability-services/",
     "moreInfoLabel": "Guia oficial de acessibilidade Disney",
     "tips": [
       {
         "id": "t-l5-1",
         "title": "Locadoras externas entregam no hotel",
-        "description": "Mais barato e garantido — dentro do parque pode esgotar."
+        "description": "**Locadoras externas entregam no hotel.** Mais barato e garantido — dentro do parque pode esgotar."
       },
       {
         "id": "t-l5-2",
         "title": "ECV: independência maior",
-        "description": "Mas exige aprendizado de manuseio — peça um tutorial."
+        "description": "**ECV: independência maior.** Mas exige aprendizado de manuseio — peça um tutorial."
       },
       {
         "id": "t-l5-3",
         "title": "Cadeira de rodas manual: precisa de acompanhante",
-        "description": "Planeje revezamento entre adultos."
+        "description": "**Cadeira de rodas manual: precisa de acompanhante.** Planeje revezamento entre adultos."
+      },
+      {
+        "id": "t-abf66b",
+        "title": "Aluguel por empresas locais",
+        "description": "**Aluguel por empresas locais.** Alugue ECV ou cadeira de rodas com empresas como CDO, Scootaround ou Buena Vista Scooters. Elas entregam no hotel, custam menos que o aluguel interno (~$40/dia vs. ~$50+/dia nos parques) e a reserva é garantida — dentro do parque o estoque costuma esgotar nos dias movimentados."
       }
     ],
     "savings": [
@@ -914,12 +1096,17 @@
       {
         "id": "t-l6-1",
         "title": "Solicite no Guest Services no primeiro dia",
-        "description": "Não é Express Pass — você agenda um horário e volta na hora certa."
+        "description": "**Solicite no Guest Services no primeiro dia.** Não é Express Pass — você agenda um horário e volta na hora certa."
       },
       {
         "id": "t-l6-2",
         "title": "Documentação médica em inglês ajuda",
-        "description": "Não é sempre exigida, mas agiliza o processo."
+        "description": "**Documentação médica em inglês ajuda.** Não é sempre exigida, mas agiliza o processo."
+      },
+      {
+        "id": "t-f4fac1",
+        "title": "Pré-registro DAS por vídeo",
+        "description": "Pré-registro DAS por vídeo (Disney): o pedido é feito por videochamada com Cast Member, com até 60 dias de antecedência. Conversa é em inglês — prepare-se. Sem isso, o DAS não é liberado no parque."
       }
     ],
     "savings": [],
@@ -940,12 +1127,12 @@
       {
         "id": "t-l7-1",
         "title": "Identifique áreas com sombra e bancos",
-        "description": "Cada parque tem zonas de descanso — mapeie antes."
+        "description": "**Identifique áreas com sombra e bancos.** Cada parque tem zonas de descanso — mapeie antes."
       },
       {
         "id": "t-l7-2",
         "title": "Alterne parque ↔ descanso ao longo da semana",
-        "description": "Dia de piscina no hotel entre dois dias de parque mantém a energia do grupo."
+        "description": "**Alterne parque ↔ descanso ao longo da semana.** Dia de piscina no hotel entre dois dias de parque mantém a energia do grupo."
       }
     ],
     "savings": [],
@@ -966,7 +1153,12 @@
       {
         "id": "t-l2-1",
         "title": "Protetor com FPS 50+ obrigatório no verão",
-        "description": "Sol de Florida é intenso — reaplicar de hora em hora."
+        "description": "**Protetor com FPS 50+ obrigatório no verão.** Sol de Florida é intenso — reaplicar de hora em hora."
+      },
+      {
+        "id": "t-3a3dd3",
+        "title": "Garrafa térmica é permitida",
+        "description": "Garrafa térmica vazia é permitida nos parques. Há refis gratuitos de água gelada em quiosques e fontes — alivia o calor e economiza ~$5/dia/pessoa em bebidas."
       }
     ],
     "savings": [
@@ -992,7 +1184,12 @@
       {
         "id": "t-c1-1",
         "title": "Outlets têm 30–60% off em marcas premium",
-        "description": "Premium Outlets e Vineland Outlets — reserve um dia inteiro."
+        "description": "**Outlets têm 30–60% off em marcas premium.** Premium Outlets e Vineland Outlets — reserve um dia inteiro."
+      },
+      {
+        "id": "t-d04a47",
+        "title": "Sales tax não tem isenção para turistas",
+        "description": "Sales tax não tem isenção para turistas: na Flórida o imposto sobre vendas é ~6,5% e não é restituído. Some o imposto no preço ao comparar com o Brasil."
       }
     ],
     "savings": [],
@@ -1015,7 +1212,7 @@
       {
         "id": "t-c2-1",
         "title": "Acima da cota: alíquota de 50% sobre o excedente",
-        "description": "Use a calculadora na tab Ferramentas para simular."
+        "description": "**Acima da cota: alíquota de 50% sobre o excedente.** Use a calculadora na tab Ferramentas para simular."
       }
     ],
     "savings": [],
@@ -1036,7 +1233,7 @@
       {
         "id": "t-s2-1",
         "title": "Tradução juramentada não é obrigatória",
-        "description": "Mas ajuda em fiscalizações — especialmente em aeroportos."
+        "description": "**Tradução juramentada não é obrigatória.** Mas ajuda em fiscalizações — especialmente em aeroportos."
       }
     ],
     "savings": [],
@@ -1060,10 +1257,160 @@
       {
         "id": "t-v1-1",
         "title": "Preencha em casa ou no avião",
-        "description": "Não deixe para a fila do aeroporto — é lento e estressante."
+        "description": "**Preencha em casa ou no avião.** Não deixe para a fila do aeroporto — é lento e estressante."
       }
     ],
     "savings": [],
+    "triggers": {
+      "country": "BR"
+    }
+  },
+  {
+    "id": "APP-01",
+    "title": "Configurar apps oficiais dos parques",
+    "category": "parks",
+    "priority": "high",
+    "deadlineDays": 30,
+    "requiresDate": false,
+    "scope": "GLOBAL",
+    "description": "Baixe e configure My Disney Experience e Universal Orlando Resort. Vincule ingressos, cadastre cartão para Mobile Order e contactless. Sem os apps, não dá pra reservar restaurantes, comprar Lightning Lane ou pedir comida sem fila.",
+    "tips": [
+      {
+        "id": "t-app01-1",
+        "title": "Vincule ingressos antes de viajar",
+        "description": "**Vincule ingressos antes de viajar.** Adicione todos os ingressos no app ainda no Brasil — evita correr atrás do código no aeroporto e libera as funções de Mobile Order e Lightning Lane."
+      },
+      {
+        "id": "t-app01-2",
+        "title": "Mobile Order economiza muito tempo",
+        "description": "**Mobile Order economiza muito tempo.** Restaurantes de serviço rápido permitem pedir e pagar pelo app, com retirada em janela exclusiva. Em alta temporada, economiza 30–60 min por refeição."
+      }
+    ],
+    "savings": [],
+    "triggers": {}
+  },
+  {
+    "id": "F-05",
+    "title": "Contratar internet móvel (eSIM ou chip)",
+    "category": "finance",
+    "priority": "high",
+    "deadlineDays": 14,
+    "requiresDate": false,
+    "scope": "BR",
+    "description": "Verifique primeiro se seu plano pós-pago já inclui dados nos EUA (ex.: Vivo Travel, Claro Passaporte Americas, TIM Viagem). Se não tiver, contrate um eSIM antes do voo — Airalo e Mobimatter são as opções mais econômicas. Mantém o número brasileiro no WhatsApp e dá internet imediata na chegada.",
+    "tips": [
+      {
+        "id": "t-f05-plan",
+        "title": "Cheque seu plano pós-pago primeiro",
+        "description": "**Cheque seu plano pós-pago primeiro.** Vivo Travel, Claro Passaporte Americas e TIM Viagem costumam incluir dias de uso nos EUA sem custo adicional. Confirme na operadora antes de comprar eSIM separado."
+      },
+      {
+        "id": "t-f05-esim",
+        "title": "Airalo e Mobimatter têm os melhores preços",
+        "description": "**Airalo e Mobimatter têm os melhores preços.** Para quem precisa de eSIM avulso, Airalo e Mobimatter têm planos de dados nos EUA a partir de US$ 4–10 por GB, bem mais barato que Holafly ou pacotes ilimitados."
+      },
+      {
+        "id": "t-f05-activate",
+        "title": "Ative ainda no Brasil",
+        "description": "**Ative ainda no Brasil.** Configurar o eSIM antes do embarque evita ficar sem internet no aeroporto americano (onde o WiFi pode ser pago ou instável)."
+      },
+      {
+        "id": "t-f05-whatsapp",
+        "title": "Mantenha o número BR no WhatsApp",
+        "description": "**Mantenha o número BR no WhatsApp.** O WhatsApp continua funcionando com o número brasileiro mesmo usando outro chip — só conferir nas configurações que o número antigo permaneça vinculado."
+      }
+    ],
+    "savings": [
+      {
+        "id": "s-f05-gigsky",
+        "title": "Gigsky gratuito com Visa Infinite",
+        "description": "Quem tem cartão Visa Infinite ganha pacotes de dados gratuitos pelo Gigsky — ativados pelo app, sem custo. Confira o benefício no site da Visa antes de comprar eSIM.",
+        "usd": 45
+      }
+    ],
+    "triggers": {
+      "country": "BR"
+    }
+  },
+  {
+    "id": "L-08",
+    "title": "Aprender a cultura de gorjeta nos EUA",
+    "category": "daily",
+    "priority": "medium",
+    "deadlineDays": 14,
+    "requiresDate": false,
+    "scope": "BR",
+    "description": "Gorjeta nos EUA não é opcional — faz parte do salário do profissional. Restaurantes 15–20% sobre o valor antes dos impostos; camareira de hotel $1–2/dia deixados na cama; bell boy $5 por mala; taxista/Uber 15%; manobrista $5.",
+    "tips": [
+      {
+        "id": "t-l08-1",
+        "title": "Confira se o tip já vem incluso",
+        "description": "**Confira se o tip já vem incluso.** Em mesas com 6+ pessoas, o restaurante já inclui automaticamente 18–20% (chamado de gratuity). Confira o recibo antes de dar tip extra."
+      },
+      {
+        "id": "t-l08-2",
+        "title": "Deixe gorjeta para a camareira todo dia",
+        "description": "**Deixe gorjeta para a camareira todo dia.** Camareiras mudam ao longo da semana — deixar $1–2 todo dia na cama garante que a pessoa que limpou o quarto receba, não só a do último dia."
+      }
+    ],
+    "savings": [],
+    "triggers": {
+      "country": "BR"
+    }
+  },
+  {
+    "id": "P-06",
+    "title": "Planejar dias em Epic Universe",
+    "category": "parks",
+    "priority": "high",
+    "deadlineDays": 75,
+    "requiresDate": false,
+    "scope": "GLOBAL",
+    "description": "Parque novo da Universal (aberto em maio/2025) com 5 mundos imersivos: Super Nintendo World, Wizarding World, How to Train Your Dragon, Dark Universe e Celestial Park. Reserve pelo menos 2 dias completos. Bilhete Park-to-Park de 4–5 dias é o sweet spot. Para grupos pequenos, considerar hospedagem nos hotéis Helios Grand ou Terra Luna pelo Early Park Admission.",
+    "tips": [
+      {
+        "id": "t-p06-1",
+        "title": "Chegue 40 min antes do rope drop",
+        "description": "**Chegue 40 min antes do rope drop.** Epic Universe é grande e espalhado — chegar cedo é a única forma de pegar as atrações mais disputadas (especialmente Super Nintendo World) com fila razoável."
+      },
+      {
+        "id": "t-p06-2",
+        "title": "Hospedagem on-site dá Early Park Admission",
+        "description": "**Hospedagem on-site dá Early Park Admission.** Helios Grand e Terra Luna ficam ao lado do parque e dão acesso 1h antes da abertura para hóspedes. Vale comparar o adicional vs. economia de tempo de fila."
+      },
+      {
+        "id": "t-p06-3",
+        "title": "Park-to-Park ticket é praticamente obrigatório",
+        "description": "**Park-to-Park ticket é praticamente obrigatório.** Sem Park-to-Park você fica preso em um parque por dia. Como Epic Universe + Islands + Studios são complementares, a flexibilidade compensa o custo extra."
+      }
+    ],
+    "savings": [],
+    "triggers": {}
+  },
+  {
+    "id": "C-03",
+    "title": "Pegar o International Visitor Coupon Book",
+    "category": "shopping",
+    "priority": "low",
+    "deadlineDays": 7,
+    "requiresDate": false,
+    "scope": "BR",
+    "description": "Nos Premium Outlets (Vineland e International Drive), procure o Guest Services, apresente o passaporte e peça o International Visitor Coupon Book gratuito. Inclui cupons extras de 10–25% em lojas selecionadas. Aplicável uma vez por visita, vale para o grupo inteiro.",
+    "tips": [
+      {
+        "id": "t-c03-1",
+        "title": "Vá primeiro no Guest Services",
+        "description": "**Vá primeiro no Guest Services.** É a primeira parada antes de entrar em qualquer loja — geralmente fica perto da entrada principal do outlet. Sem o passaporte físico, eles não entregam o cupom."
+      }
+    ],
+    "savings": [
+      {
+        "id": "s-c03-1",
+        "title": "Use o cupom em marcas premium",
+        "description": "Os cupons mais valiosos costumam ser de marcas como Coach, Michael Kors, Polo Ralph Lauren e Kate Spade — 15–25% adicional sobre os preços de outlet.",
+        "usd": 80
+      }
+    ],
     "triggers": {
       "country": "BR"
     }

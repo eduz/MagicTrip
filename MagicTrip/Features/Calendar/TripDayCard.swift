@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TripDayCard: View {
     let day: TripDay
+    let country: String
     var onAddActivity: () -> Void
     var onEditItem: (TripDayItem) -> Void
 
@@ -16,7 +17,7 @@ struct TripDayCard: View {
             // Header
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(day.date.tripDayFormatted)
+                    Text(day.date.calendarFormatted(country: country))
                         .mtFont(15.5, weight: .semibold)
                         .foregroundStyle(day.date.isPast && !day.date.isToday ? Color.mtText3 : Color.mtText)
                     if day.date.isToday {
@@ -30,10 +31,17 @@ struct TripDayCard: View {
                     }
                 }
                 Spacer()
-                Button { showNoteEditor = true } label: {
-                    Image(systemName: day.note?.isEmpty == false ? "note.text" : "pencil")
-                        .mtFont(16)
-                        .foregroundStyle(Color.mtText3)
+                HStack(spacing: 16) {
+                    Button(action: onAddActivity) {
+                        Image(systemName: "plus")
+                            .mtFont(16)
+                            .foregroundStyle(Color.mtPrimary)
+                    }
+                    Button { showNoteEditor = true } label: {
+                        Image(systemName: day.note?.isEmpty == false ? "note.text" : "pencil")
+                            .mtFont(16)
+                            .foregroundStyle(Color.mtText3)
+                    }
                 }
             }
             .padding(.horizontal, 14)
@@ -53,21 +61,6 @@ struct TripDayCard: View {
                     MTDivider().padding(.leading, 48)
                 }
             }
-
-            MTDivider()
-
-            Button(action: onAddActivity) {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundStyle(Color.mtPrimary)
-                    Text(String(localized: "Adicionar atividade"))
-                        .mtFont(14.5, weight: .medium)
-                        .foregroundStyle(Color.mtPrimary)
-                }
-                .padding(.horizontal, 14)
-                .padding(.vertical, 12)
-            }
-            .buttonStyle(.plain)
         }
         .background(Color.mtCard)
         .cornerRadius(.mtCardLg)

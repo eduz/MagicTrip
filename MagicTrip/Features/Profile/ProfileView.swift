@@ -38,18 +38,19 @@ struct ProfileView: View {
                             .foregroundStyle(Color.mtPrimary)
                     }
 
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            StatPill(icon: "person.2.fill", label: String(localized: "Viajantes"), value: "\(profile.totalTravelers)")
-                            if let dep = profile.departureDate {
-                                StatPill(icon: "airplane.departure", label: String(localized: "Saída"), value: dep.tripDayFormatted)
-                            }
-                            if let days = profile.durationDays {
-                                StatPill(icon: "moon.stars", label: String(localized: "Noites"), value: "\(days)")
-                            }
-                            StatPill(icon: "flag", label: String(localized: "País"), value: profile.country)
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                        StatPill(icon: "person.2.fill", label: String(localized: "Viajantes"), value: "\(profile.totalTravelers)")
+                        if let dep = profile.departureDate {
+                            StatPill(icon: "airplane.departure", label: String(localized: "Saída"), value: dep.calendarFormatted(country: profile.country, shortYear: true))
                         }
-                        .padding(.horizontal, 2)
+                        if let days = profile.durationDays {
+                            StatPill(icon: "moon.stars", label: String(localized: "Noites"), value: "\(days)")
+                        }
+                        StatPill(
+                            icon: "flag",
+                            label: String(localized: "País de origem"),
+                            value: CatalogLoader.shared.countries.first(where: { $0.code == profile.country })?.flag ?? profile.country
+                        )
                     }
                 }
                 .padding(16)

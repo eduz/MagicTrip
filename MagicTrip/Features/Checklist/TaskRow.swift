@@ -13,7 +13,9 @@ struct TaskRow: View {
                     .padding(.top, 2)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 6) {
+                    HStack(alignment: .center, spacing: 6) {
+                        MTPriorityDot(priority: task.priority)
+                            .padding(.top, 1)
                         Text(task.title)
                             .mtFont(15.5, weight: task.isCompleted ? .regular : .medium)
                             .foregroundStyle(Color.mtText)
@@ -31,8 +33,6 @@ struct TaskRow: View {
                     }
 
                     HStack(spacing: 8) {
-                        MTPriorityDot(priority: task.priority)
-
                         if let deadline = task.effectiveDeadline {
                             deadlineBadge(deadline)
                         }
@@ -41,6 +41,7 @@ struct TaskRow: View {
                             savingsChip(saving)
                         }
                     }
+                    .padding(.leading, 13)
                 }
 
                 Spacer(minLength: 4)

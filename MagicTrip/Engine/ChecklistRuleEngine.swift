@@ -4,9 +4,10 @@ import Foundation
 struct ResolvedTask: Identifiable {
     let template: TaskTemplate
     var status: TaskStatus
-    var locked: Bool          // date-dependent task while profile.planningStatus == .undecided
+    var locked: Bool
     var effectiveDeadlineDays: Int?
     var departureDate: Date?  // copied from profile at evaluation time
+    var travelers: Int = 1    // copied from profile at evaluation time
     var isNew: Bool = false   // appeared due to dependency resolution this pass
 
     var id: String { template.id }
@@ -34,7 +35,9 @@ struct ResolvedTask: Identifiable {
     }
 
     var estimatedSavingUSD: Double? {
-        let total = savings.reduce(0.0) { $0 + $1.usdPerPerson }
+        let total = savings.reduce(0.0) { acc, s in
+            acc + (s.savingsScope == .shared ? s.usdPerPerson : s.usdPerPerson * Double(travelers))
+        }
         return total > 0 ? total : nil
     }
 }
@@ -101,14 +104,19 @@ final class ChecklistRuleEngine {
 
             // 5. Existing status (preserved across re-evaluations; migrate legacy .locked → .pending)
             let existing = existingStatuses[tmpl.id]
-            let status = (existing == .locked || existing == nil) ? .pending : existing!
+            let baseStatus: TaskStatus = (existing == .locked || existing == nil) ? .pending : existing!
+            // PL-01 auto-completes when departure date is set, and reverts when date is cleared
+            let status: TaskStatus = (tmpl.id == "PL-01")
+                ? (profile.departureDate != nil ? .completed : .pending)
+                : baseStatus
 
             return ResolvedTask(
                 template: tmpl,
                 status: status,
                 locked: false,
                 effectiveDeadlineDays: deadline,
-                departureDate: profile.departureDate
+                departureDate: profile.departureDate,
+                travelers: profile.totalTravelers
             )
         }
     }

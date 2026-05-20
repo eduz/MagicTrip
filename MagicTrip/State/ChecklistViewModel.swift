@@ -21,6 +21,9 @@ final class ChecklistViewModel {
         return TaskCategory.allCases.compactMap { cat in
             let prio: [TaskPriority: Int] = [.critical: 0, .high: 1, .medium: 2, .low: 3]
             let list = (byCat[cat] ?? []).sorted { a, b in
+                let dA = a.template.deadlineDays ?? -1
+                let dB = b.template.deadlineDays ?? -1
+                if dA != dB { return dA > dB }
                 return (prio[a.priority] ?? 3) < (prio[b.priority] ?? 3)
             }
             return list.isEmpty ? nil : (cat, list)

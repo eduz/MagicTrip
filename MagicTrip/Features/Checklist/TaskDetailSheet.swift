@@ -10,6 +10,7 @@ struct TaskDetailSheet: View {
     @Environment(\.modelContext) private var modelContext
     @State private var selectedOptionID: String? = nil
     @State private var multiSelectedIDs: Set<String> = []
+    @State private var showDateAlert = false
 
     var body: some View {
         NavigationStack {
@@ -227,8 +228,12 @@ struct TaskDetailSheet: View {
             HStack(spacing: 12) {
                 if task.isCompleted || task.isSkipped {
                     MTButton(label: String(localized: "Reabrir"), variant: .ghost) {
-                        vm.setStatus(taskID: task.id, status: .pending, profile: profile)
-                        onClose()
+                        if task.id == "PL-01" {
+                            showDateAlert = true
+                        } else {
+                            vm.setStatus(taskID: task.id, status: .pending, profile: profile)
+                            onClose()
+                        }
                     }
                 } else {
                     MTButton(label: String(localized: "Pular"), variant: .ghost) {
@@ -241,14 +246,26 @@ struct TaskDetailSheet: View {
                             : String(localized: "Marcar como feita"),
                         variant: .primary
                     ) {
-                        vm.setStatus(taskID: task.id, status: .completed, profile: profile)
-                        onClose()
+                        if task.id == "PL-01" && profile.departureDate == nil {
+                            showDateAlert = true
+                        } else {
+                            vm.setStatus(taskID: task.id, status: .completed, profile: profile)
+                            onClose()
+                        }
                     }
                 }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .background(.ultraThinMaterial)
+        }
+        .alert(String(localized: "Edite no seu perfil"), isPresented: $showDateAlert) {
+            Button(String(localized: "OK")) {}
+        } message: {
+            Text(task.isCompleted
+                ? String(localized: "Para reabrir esta tarefa, acesse seu perfil e altere o status para \"Ainda decidindo\".")
+                : String(localized: "Defina as datas da viagem no seu perfil antes de concluir esta tarefa.")
+            )
         }
     }
 }

@@ -39,6 +39,7 @@ struct CalendarView: View {
                             ForEach(sortedDays) { day in
                                 TripDayCard(
                                     day: day,
+                                    country: profile.country,
                                     onAddActivity: { showAddActivity = day },
                                     onEditItem: { editingItem = $0 }
                                 )
